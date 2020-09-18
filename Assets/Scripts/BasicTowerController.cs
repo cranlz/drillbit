@@ -6,22 +6,24 @@ public class BasicTowerController : MonoBehaviour
 {
     // Start is called before the first frame update
     public List<GameObject> targets = new List<GameObject>();
-    public float range = 1.0f;
-    public float rateOfFire = 1.0f;
-    public float rotationSpeed = 120.0f;
+    public float rotationSpeed = 180.0f;
     private GameObject currentTarget;
+    public Transform barrel;
+    public int damage = 1;
+    public float rateOfFire = 1.0f;
+    private float timer = 0.0f;
+    private LineRenderer shotLine;
+    private WaitForSeconds shotDuration = new WaitForSeconds(.05f);
+    public float range = 50.0f;
+
     void Start()
     {
-        CircleCollider2D rangeCollider = this.gameObject.AddComponent<CircleCollider2D>();
-        rangeCollider.radius = range;
-        rangeCollider.isTrigger = true;
+        shotLine = GetComponent<LineRenderer>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         //Check if any enemies in range
-        if (targets.Count != 0) 
+        if (targets.Count != 0)
         {
             var distance = float.MaxValue;
             GameObject target = null;
@@ -37,22 +39,48 @@ public class BasicTowerController : MonoBehaviour
                     distance = curDistance;
                 }
             }
-        //Rotate to face target
-        var lookPos = target.transform.position - transform.position;
-        lookPos.y = 0;
-        var endRotation = Quaternion.LookRotation(lookPos);
-        var startRotation = transform.rotation;
-        //var angle = 
+            //Rotate to face target
+            var lookPos = target.transform.position - transform.position;
+            lookPos.y = 0;
+            var endRot = Quaternion.LookRotation(lookPos);
+            var newRot = Quaternion.RotateTowards(transform.rotation, endRot, Time.deltaTime * rotationSpeed);
+            transform.rotation = newRot;
 
-        //Fire every rateOfFire frames
+            //Fire every rateOfFire seconds, but only if enemy is in our sights
+            var angle = 10;
+            timer += Time.deltaTime;
+            if (Vector3.Angle(transform.forward, lookPos) < angle && timer > rateOfFire)
+            {
+                Debug.Log("firing! " + timer);
+                StartCoroutine(ShotEffect());
+                RaycastHit hit;
+                shotLine.SetPosition(0, barrel.position);
+                if (Physics.Raycast(barrel.position, transform.forward, out hit, range))
+                {
+                    shotLine.SetPosition(1, hit.point);
+                } else
+                {
+                    shotLine.SetPosition(1, transform.forward * range);
+                }
+                timer = 0f;
+            }
         }
-        
+
     }
 
-    private void OnTriggerEnter (Collider col) {
+    private void OnTriggerEnter(Collider col)
+    {
         if (col.CompareTag("enemy")) targets.Add(col.gameObject);
     }
-    private void OnTriggerExit(Collider col) {
+    private void OnTriggerExit(Collider col)
+    {
         if (col.CompareTag("enemy")) targets.Remove(col.gameObject);
+    }
+
+    private IEnumerator ShotEffect()
+    {
+        shotLine.enabled = true;
+        yield return shotDuration;
+        shotLine.enabled = false;
     }
 }
