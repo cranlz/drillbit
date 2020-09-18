@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class BasicTowerController : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class BasicTowerController : MonoBehaviour
             var distance = float.MaxValue;
             GameObject target = null;
 
+            //Remove any dead enemies
+            targets = targets.Where(item => item != null).ToList();
             //Loop through possible targets and find the closest
             foreach (var i in targets)
             {
@@ -39,6 +42,9 @@ public class BasicTowerController : MonoBehaviour
                     distance = curDistance;
                 }
             }
+
+            if(target == null) return;
+
             //Rotate to face target
             var lookPos = target.transform.position - transform.position;
             lookPos.y = 0;
@@ -51,14 +57,22 @@ public class BasicTowerController : MonoBehaviour
             timer += Time.deltaTime;
             if (Vector3.Angle(transform.forward, lookPos) < angle && timer > rateOfFire)
             {
-                Debug.Log("firing! " + timer);
+                //Shoot out our raycast and apply damage to enemy
                 StartCoroutine(ShotEffect());
                 RaycastHit hit;
                 shotLine.SetPosition(0, barrel.position);
                 if (Physics.Raycast(barrel.position, transform.forward, out hit, range))
                 {
                     shotLine.SetPosition(1, hit.point);
-                } else
+                    BasicEnemyController health = hit.collider.GetComponent<BasicEnemyController>();
+                    if (health != null)
+                    {
+                        health.Damage(damage);
+                        targets.Remove(target);
+                        Destroy(target);
+                    }
+                }
+                else
                 {
                     shotLine.SetPosition(1, transform.forward * range);
                 }
