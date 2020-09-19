@@ -121,75 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 5870cddf2ea21a14ab40fc9e3be180ac, type: 2}
---- !u!1001 &190963570
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.447
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.084
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4006873068114912605, guid: 56a593bac69253743b137dcb44be1e05,
-        type: 3}
-      propertyPath: m_Name
-      value: TowerPrototype (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 56a593bac69253743b137dcb44be1e05, type: 3}
 --- !u!1 &912188538
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,8 +137,8 @@ GameObject:
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &912188539
 Transform:
@@ -442,6 +373,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4006873067950201891, guid: 56a593bac69253743b137dcb44be1e05,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.797
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006873068114912600, guid: 56a593bac69253743b137dcb44be1e05,
+        type: 3}
+      propertyPath: m_Positions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4006873068114912603, guid: 56a593bac69253743b137dcb44be1e05,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -501,6 +442,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TowerPrototype
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006873068114912607, guid: 56a593bac69253743b137dcb44be1e05,
+        type: 3}
+      propertyPath: rateOfFire
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006873068114912607, guid: 56a593bac69253743b137dcb44be1e05,
+        type: 3}
+      propertyPath: range
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56a593bac69253743b137dcb44be1e05, type: 3}
@@ -615,8 +566,8 @@ GameObject:
   m_Name: ResourceCollector
   m_TagString: tower
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1705214777
 BoxCollider:

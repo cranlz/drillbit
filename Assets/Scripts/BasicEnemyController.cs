@@ -16,11 +16,12 @@ public class BasicEnemyController : MonoBehaviour
         agent.SetDestination(getClosest().transform.position);
     }
 
-    public void Damage(int damageAmount)
+    public void Damage(int damageAmount, GameObject killer)
     {
         health -= damageAmount;
         if (health <= 0)
         {
+            killer.GetComponent<BasicTowerController>().RemoveFromTargets(gameObject);
             Destroy(gameObject);
         }
     }

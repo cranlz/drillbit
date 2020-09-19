@@ -60,21 +60,19 @@ public class BasicTowerController : MonoBehaviour
                 //Shoot out our raycast and apply damage to enemy
                 StartCoroutine(ShotEffect());
                 RaycastHit hit;
-                shotLine.SetPosition(0, barrel.position);
+                shotLine.SetPosition(0, transform.InverseTransformPoint(barrel.position));
                 if (Physics.Raycast(barrel.position, transform.forward, out hit, range))
                 {
-                    shotLine.SetPosition(1, hit.point);
+                    shotLine.SetPosition(1, transform.InverseTransformPoint(hit.point));
                     BasicEnemyController health = hit.collider.GetComponent<BasicEnemyController>();
                     if (health != null)
                     {
-                        health.Damage(damage);
-                        targets.Remove(target);
-                        Destroy(target);
+                        health.Damage(damage, gameObject);
                     }
                 }
                 else
                 {
-                    shotLine.SetPosition(1, transform.forward * range);
+                    shotLine.SetPosition(1, transform.InverseTransformPoint(transform.forward * range));
                 }
                 timer = 0f;
             }
@@ -99,5 +97,10 @@ public class BasicTowerController : MonoBehaviour
         shotLine.enabled = true;
         yield return shotDuration;
         shotLine.enabled = false;
+    }
+
+    public void RemoveFromTargets(GameObject targetToRemove)
+    {
+        targets.Remove(targetToRemove);
     }
 }
