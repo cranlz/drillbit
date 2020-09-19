@@ -443,10 +443,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerPrototype
       objectReference: {fileID: 0}
+    - target: {fileID: 4006873068114912606, guid: 56a593bac69253743b137dcb44be1e05,
+        type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4006873068114912607, guid: 56a593bac69253743b137dcb44be1e05,
         type: 3}
       propertyPath: rateOfFire
-      value: 0.01
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4006873068114912607, guid: 56a593bac69253743b137dcb44be1e05,
         type: 3}

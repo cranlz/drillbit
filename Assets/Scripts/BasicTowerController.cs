@@ -16,6 +16,7 @@ public class BasicTowerController : MonoBehaviour
     private LineRenderer shotLine;
     private WaitForSeconds shotDuration = new WaitForSeconds(.05f);
     public float range = 50.0f;
+    public int health = 10;
 
     void Start()
     {
