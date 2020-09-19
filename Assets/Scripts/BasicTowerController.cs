@@ -24,7 +24,7 @@ public class BasicTowerController : MonoBehaviour
     void Update()
     {
         //Check if any enemies in range
-        if (targets.Count != 0)
+        if (targets.Count != 0) //Active state
         {
             var distance = float.MaxValue;
             GameObject target = null;
@@ -78,6 +78,9 @@ public class BasicTowerController : MonoBehaviour
                 }
                 timer = 0f;
             }
+        } else //Idle state
+        {
+            //transform.Rotate(0f, 0.1f, 0f, Space.Self);
         }
 
     }
