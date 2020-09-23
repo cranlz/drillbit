@@ -7,7 +7,6 @@ TagManager:
   - enemy
   - resource
   - construct
-  - tower
   layers:
   - Default
   - TransparentFX

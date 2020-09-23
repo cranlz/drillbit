@@ -127,7 +127,7 @@ GameObject:
   - component: {fileID: 4006873068114912600}
   m_Layer: 0
   m_Name: TowerPrototype
-  m_TagString: tower
+  m_TagString: construct
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -210,8 +210,10 @@ MonoBehaviour:
   rotationSpeed: 360
   barrel: {fileID: 4006873067950201891}
   damage: 1
-  rateOfFire: 1
+  rateOfFire: 0.5
+  maxFireAngle: 10
   range: 50
+  health: 10
 --- !u!135 &4006873068114912606
 SphereCollider:
   m_ObjectHideFlags: 0

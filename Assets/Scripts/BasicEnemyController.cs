@@ -9,7 +9,7 @@ public class BasicEnemyController : MonoBehaviour
     public int health = 1;
     private NavMeshAgent agent;
     public GameObject currentTarget;
-    // Start is called before the first frame update
+    private bool markedForDeletion = false;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -19,9 +19,11 @@ public class BasicEnemyController : MonoBehaviour
     public void Damage(int damageAmount, GameObject killer)
     {
         health -= damageAmount;
-        if (health <= 0)
+        if (health <= 0 && !markedForDeletion)
         {
+            markedForDeletion = true;
             killer.GetComponent<BasicTowerController>().RemoveFromTargets(gameObject);
+            WaveManager.enemyCount--;
             Destroy(gameObject);
         }
     }
