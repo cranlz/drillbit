@@ -29,7 +29,7 @@ public class BasicEnemyController : MonoBehaviour
     private GameObject getClosest()
     {
         var distance = float.MaxValue;
-        var towers = GameObject.FindGameObjectsWithTag("tower");
+        var towers = GameObject.FindGameObjectsWithTag("construct");
         foreach (var i in towers)
             {
                 var diff = i.transform.position - transform.position;

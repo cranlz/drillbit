@@ -12,6 +12,7 @@ public class BasicTowerController : MonoBehaviour
     public Transform barrel;
     public int damage = 1;
     public float rateOfFire = 1.0f;
+    public int maxFireAngle = 10;
     private float timer = 0.0f;
     private LineRenderer shotLine;
     private WaitForSeconds shotDuration = new WaitForSeconds(.05f);
@@ -54,9 +55,8 @@ public class BasicTowerController : MonoBehaviour
             transform.rotation = newRot;
 
             //Fire every rateOfFire seconds, but only if enemy is in our sights
-            var angle = 10;
             timer += Time.deltaTime;
-            if (Vector3.Angle(transform.forward, lookPos) < angle && timer > rateOfFire)
+            if (Vector3.Angle(transform.forward, lookPos) < maxFireAngle && timer > rateOfFire)
             {
                 //Shoot out our raycast and apply damage to enemy
                 StartCoroutine(ShotEffect());
