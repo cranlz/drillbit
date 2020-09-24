@@ -6,24 +6,23 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     public LayerMask whatCanBeClickedOn;
-    private NavMeshAgent myAgent;
-    public GameObject enemy;
+    private NavMeshAgent agent;
     public GameObject[] towers;
     public int towerCost = 5;
     private Transform buildPreview;
     void Start()
     {
-        myAgent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         buildPreview = transform.Find("BuildPreview");
     }
 
     void Update() {
         Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitInfo;
+        RaycastHit hit;
         if (Input.GetMouseButton(1)) {
             //rotate to mouse
-            if (Physics.Raycast(myRay, out hitInfo, 100, whatCanBeClickedOn)) {
-                var lookPos = hitInfo.point - transform.position;
+            if (Physics.Raycast(myRay, out hit, 100, whatCanBeClickedOn)) {
+                var lookPos = hit.point - transform.position;
                 lookPos.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookPos);
             }
@@ -33,8 +32,8 @@ public class PlayerController : MonoBehaviour
             }
         }
         else if (Input.GetMouseButtonDown(0)) {
-            if (Physics.Raycast(myRay, out hitInfo, 100, whatCanBeClickedOn)) {
-                myAgent.SetDestination(hitInfo.point);
+            if (Physics.Raycast(myRay, out hit, 100, whatCanBeClickedOn)) {
+                agent.SetDestination(hit.point);
             }
         }
 

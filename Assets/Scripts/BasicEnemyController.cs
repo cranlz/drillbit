@@ -22,7 +22,7 @@ public class BasicEnemyController : MonoBehaviour
         if (health <= 0 && !markedForDeletion)
         {
             markedForDeletion = true;
-            killer.GetComponent<BasicTowerController>().RemoveFromTargets(gameObject);
+            killer.GetComponent<BasicTowerController>().targets.Remove(gameObject);
             WaveManager.enemyCount--;
             Destroy(gameObject);
         }

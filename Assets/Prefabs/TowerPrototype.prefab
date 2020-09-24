@@ -208,9 +208,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targets: []
   rotationSpeed: 360
-  barrel: {fileID: 4006873067950201891}
+  barrelExit: {fileID: 4006873067950201891}
   damage: 1
-  rateOfFire: 0.5
+  rateOfFire: 1
   maxFireAngle: 10
   range: 50
   health: 10

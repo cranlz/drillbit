@@ -9,7 +9,7 @@ public class BasicTowerController : MonoBehaviour
     public List<GameObject> targets = new List<GameObject>();
     public float rotationSpeed = 180.0f;
     private GameObject currentTarget;
-    public Transform barrel;
+    public Transform barrelExit;
     public int damage = 1;
     public float rateOfFire = 1.0f;
     public int maxFireAngle = 10;
@@ -23,6 +23,7 @@ public class BasicTowerController : MonoBehaviour
     {
         shotLine = GetComponent<LineRenderer>();
     }
+
     void Update()
     {
         //Check if any enemies in range
@@ -61,12 +62,12 @@ public class BasicTowerController : MonoBehaviour
                 //Shoot out our raycast and apply damage to enemy
                 StartCoroutine(ShotEffect());
                 RaycastHit hit;
-                shotLine.SetPosition(0, transform.InverseTransformPoint(barrel.position));
-                if (Physics.Raycast(barrel.position, transform.forward, out hit, range))
+                shotLine.SetPosition(0, transform.InverseTransformPoint(barrelExit.position));
+                if (Physics.Raycast(barrelExit.position, transform.forward, out hit, range))
                 {
                     shotLine.SetPosition(1, transform.InverseTransformPoint(hit.point));
                     BasicEnemyController health = hit.collider.GetComponent<BasicEnemyController>();
-                    //Debug.Log("hit " + hit.collider.gameObject.name);
+                    Debug.Log("hit " + hit.collider.gameObject.name);
                     if (health != null)
                     {
                         health.Damage(damage, gameObject);
@@ -99,10 +100,5 @@ public class BasicTowerController : MonoBehaviour
         shotLine.enabled = true;
         yield return shotDuration;
         shotLine.enabled = false;
-    }
-
-    public void RemoveFromTargets(GameObject targetToRemove)
-    {
-        targets.Remove(targetToRemove);
     }
 }
