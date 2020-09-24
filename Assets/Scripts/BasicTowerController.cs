@@ -18,10 +18,13 @@ public class BasicTowerController : MonoBehaviour
     private WaitForSeconds shotDuration = new WaitForSeconds(.05f);
     public float range = 50.0f;
     public int health = 10;
+    public bool markedForDeletion = false;
+    //public SphereCollider sphereCol;
 
     void Start()
     {
         shotLine = GetComponent<LineRenderer>();
+        //sphereCol = GetComponent<SphereCollider>();
     }
 
     void Update()
@@ -100,5 +103,15 @@ public class BasicTowerController : MonoBehaviour
         shotLine.enabled = true;
         yield return shotDuration;
         shotLine.enabled = false;
+    }
+    public void Damage(int damageAmount, GameObject killer)
+    {
+        health -= damageAmount;
+        if (health <= 0 && !markedForDeletion)
+        {
+            markedForDeletion = true;
+            //killer.GetComponent<BasicTowerController>().targets.Remove(gameObject);
+            Destroy(gameObject);
+        }
     }
 }

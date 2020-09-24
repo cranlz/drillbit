@@ -10,6 +10,9 @@ public class BasicCollector : MonoBehaviour
     public static int bank = 0;
     public GameObject text;
     private TextMeshPro textMesh;
+    public float health = 10f;
+    public bool markedForDeletion = false;
+
     void Start()
     {
         textMesh = text.GetComponent<TextMeshPro>();
@@ -20,5 +23,15 @@ public class BasicCollector : MonoBehaviour
     {
         bank += collectionAmount;
         textMesh.SetText("{0}", bank);
+    }
+    public void Damage(int damageAmount, GameObject killer)
+    {
+        health -= damageAmount;
+        if (health <= 0 && !markedForDeletion)
+        {
+            markedForDeletion = true;
+            //killer.GetComponent<BasicTowerController>().targets.Remove(gameObject);
+            Destroy(gameObject);
+        }
     }
 }
