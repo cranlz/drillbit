@@ -7,16 +7,12 @@ public class WaveManager : MonoBehaviour
     public GameObject[] enemyPrefabs;
     public static int enemyCount;
     public int waveIndex = 0;
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
         //Check if wave is over
-        Debug.Log(enemyCount);
+        //Debug.Log(enemyCount);
         if (enemyCount <= 0) {
             //Start new wave
             Debug.Log("Starting wave " + waveIndex);
@@ -29,7 +25,6 @@ public class WaveManager : MonoBehaviour
                 enemyCount++;
             }
         }
-
     }
 
      public Vector3 RandomCircle(Vector3 center, float radius) {
