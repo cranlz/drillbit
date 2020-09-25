@@ -12,16 +12,20 @@ public class BasicEnemyController : MonoBehaviour
     private bool markedForDeletion = false;
     public float attackRate = 0.5f;
     public int damage = 1;
+    public GameObject spriteObject;
+    private SpriteRenderer sprite;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(SetNewTarget().transform.position);
+        sprite = spriteObject.GetComponent<SpriteRenderer>();
         InvokeRepeating("Attack", 0, attackRate);
     }
 
     public void Damage(int damageAmount, GameObject killer)
     {
+        
         health -= damageAmount;
         if (health <= 0 && !markedForDeletion)
         {
@@ -52,7 +56,7 @@ public class BasicEnemyController : MonoBehaviour
     public void Attack()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 1))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 0.2f))
         {
             BasicTowerController towerScript = hit.collider.GetComponent<BasicTowerController>();
             BasicCollector collectorScript = hit.collider.GetComponent<BasicCollector>();
@@ -66,5 +70,12 @@ public class BasicEnemyController : MonoBehaviour
                 collectorScript.Damage(damage, gameObject);
             }
         }
+        bool isLeft;
+        if (agent.velocity.x == 0) {
+            isLeft = sprite.flipX;
+        } else if (agent.velocity.x < 0) {
+            isLeft = true;
+        } else isLeft = false;
+        sprite.flipX = isLeft;
     }
 }

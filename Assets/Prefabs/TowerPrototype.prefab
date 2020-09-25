@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9fb7b40ff05e2264da9d29d5413f5cb5, type: 2}
+  - {fileID: 2100000, guid: 463ca293665180c488c6280b5abbca73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -174,7 +174,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 47f36f90a375f7742925228eaa4daea5, type: 2}
+  - {fileID: 2100000, guid: 9fb7b40ff05e2264da9d29d5413f5cb5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -215,6 +215,7 @@ MonoBehaviour:
   maxFireAngle: 10
   range: 50
   health: 10
+  markedForDeletion: 0
 --- !u!135 &4006873068114912606
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -226,7 +227,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &4006873068114912580
 Rigidbody:
@@ -262,7 +263,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6ee3a824894befa4db8413888db7eb3a, type: 2}
+  - {fileID: 2100000, guid: 0f89f6947e6756c4bbfd0cb19cdef3e6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -307,7 +308,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 0.54901963}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

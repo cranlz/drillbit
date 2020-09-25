@@ -7,7 +7,7 @@ public class BasicCollector : MonoBehaviour
 {
     public float rateOfCollection = 1.0f;
     public int collectionAmount = 1;
-    public static int bank = 0;
+    public static int bank = 10;
     public GameObject text;
     private TextMeshPro textMesh;
     public float health = 10f;
