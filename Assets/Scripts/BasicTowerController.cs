@@ -70,7 +70,7 @@ public class BasicTowerController : MonoBehaviour
                 {
                     shotLine.SetPosition(1, transform.InverseTransformPoint(hit.point));
                     BasicEnemyController health = hit.collider.GetComponent<BasicEnemyController>();
-                    Debug.Log("hit " + hit.collider.gameObject.name);
+                    //Debug.Log("hit " + hit.collider.gameObject.name);
                     if (health != null)
                     {
                         health.Damage(damage, gameObject);

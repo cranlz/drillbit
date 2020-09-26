@@ -56,18 +56,20 @@ public class BasicEnemyController : MonoBehaviour
     public void Attack()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 0.2f))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 2f))
         {
+            Debug.DrawRay(transform.position, transform.forward * 2f);
             BasicTowerController towerScript = hit.collider.GetComponent<BasicTowerController>();
             BasicCollector collectorScript = hit.collider.GetComponent<BasicCollector>();
-            Debug.Log("hit " + hit.collider.gameObject.name);
             if (towerScript != null)
             {
                 towerScript.Damage(damage, gameObject);
+                Debug.Log("hit " + hit.collider.gameObject.name);
             }
             else if (collectorScript != null)
             {
                 collectorScript.Damage(damage, gameObject);
+                Debug.Log("hit " + hit.collider.gameObject.name);
             }
         }
         bool isLeft;
