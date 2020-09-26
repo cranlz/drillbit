@@ -16,7 +16,7 @@ public class WaveManager : MonoBehaviour
         if (enemyCount <= 0) {
             //Start new wave
             Debug.Log("Starting wave " + waveIndex);
-            var pos = RandomCircle(Vector3.zero, 5f);
+            var pos = RandomCircle(Vector3.zero, 50f);
             var rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero);
             waveIndex++;
             //start coroutine spawning enemies
