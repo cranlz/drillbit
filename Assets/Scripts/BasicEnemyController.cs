@@ -37,6 +37,7 @@ public class BasicEnemyController : MonoBehaviour
             killer.GetComponent<BasicTowerController>().targets.Remove(gameObject);
             WaveManager.enemyCount--;
             waveM.updateEnemyUI();
+            BasicCollector.bank += 2;
             Destroy(gameObject);
         }
     }

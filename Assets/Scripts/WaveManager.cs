@@ -8,6 +8,7 @@ public class WaveManager : MonoBehaviour
     public GameObject[] enemyPrefabs;
     public static int enemyCount;
     public int waveIndex = 0;
+    public float enemyGrowthRate = 1.5f;
     public Text enemyUI;
     public Text waveUI;
 
@@ -30,7 +31,7 @@ public class WaveManager : MonoBehaviour
             updateWaveUI();
             //start coroutine spawning enemies
             enemyCount = 0;
-            for (var i = 0; i < waveIndex; i++) {
+            for (var i = 0; i < Mathf.Pow(waveIndex, enemyGrowthRate); i++) {
                 Instantiate(enemyPrefabs[0], pos, rot);
                 enemyCount++;
                 updateEnemyUI();
