@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
     public GameObject[] enemyPrefabs;
     public static int enemyCount;
     public int waveIndex = 0;
+    public Text enemyUI;
+    public Text waveUI;
 
     // Update is called once per frame
     void Start()
@@ -24,13 +27,25 @@ public class WaveManager : MonoBehaviour
             var pos = RandomCircle(Vector3.zero, 50f);
             var rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero);
             waveIndex++;
+            updateWaveUI();
             //start coroutine spawning enemies
             enemyCount = 0;
             for (var i = 0; i < waveIndex; i++) {
                 Instantiate(enemyPrefabs[0], pos, rot);
                 enemyCount++;
+                updateEnemyUI();
             }
         }
+    }
+
+    public void updateEnemyUI()
+    {
+        enemyUI.text = "Enemies: " + enemyCount;
+    }
+
+    public void updateWaveUI()
+    {
+        waveUI.text = "Wave: " + waveIndex;
     }
 
      public Vector3 RandomCircle(Vector3 center, float radius) {

@@ -14,6 +14,8 @@ public class BasicEnemyController : MonoBehaviour
     public int damage = 1;
     public GameObject spriteObject;
     private SpriteRenderer sprite;
+    public GameObject waveManager;
+    private WaveManager waveM;
 
     void Start()
     {
@@ -21,6 +23,8 @@ public class BasicEnemyController : MonoBehaviour
         agent.SetDestination(SetNewTarget().transform.position);
         sprite = spriteObject.GetComponent<SpriteRenderer>();
         InvokeRepeating("Attack", 0, attackRate);
+        waveManager = GameObject.Find("WaveManager");
+        waveM = waveManager.GetComponent<WaveManager>();
     }
 
     public void Damage(int damageAmount, GameObject killer)
@@ -32,6 +36,7 @@ public class BasicEnemyController : MonoBehaviour
             markedForDeletion = true;
             killer.GetComponent<BasicTowerController>().targets.Remove(gameObject);
             WaveManager.enemyCount--;
+            waveM.updateEnemyUI();
             Destroy(gameObject);
         }
     }
