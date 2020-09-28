@@ -5,7 +5,8 @@
      public class RestartScene : MonoBehaviour {
      
          public void RestartGame() {
-             SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
+             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+             BasicCollector.bank = 10;
          }
      
      }

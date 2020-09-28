@@ -19,10 +19,14 @@ public class BasicCollector : MonoBehaviour
         InvokeRepeating("Collect", rateOfCollection, rateOfCollection);
     }
 
+    void Update()
+    {
+        textMesh.SetText("{0}", bank);
+    }
+
     private void Collect()
     {
         bank += collectionAmount;
-        textMesh.SetText("{0}", bank);
     }
     public void Damage(int damageAmount, GameObject killer)
     {
@@ -31,7 +35,7 @@ public class BasicCollector : MonoBehaviour
         {
             markedForDeletion = true;
             //killer.GetComponent<BasicTowerController>().targets.Remove(gameObject);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

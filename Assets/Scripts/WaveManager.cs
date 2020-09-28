@@ -9,6 +9,11 @@ public class WaveManager : MonoBehaviour
     public int waveIndex = 0;
 
     // Update is called once per frame
+    void Start()
+    {
+        waveIndex = 0;
+        enemyCount = 0;
+    }
     void Update()
     {
         //Check if wave is over
@@ -20,6 +25,7 @@ public class WaveManager : MonoBehaviour
             var rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero);
             waveIndex++;
             //start coroutine spawning enemies
+            enemyCount = 0;
             for (var i = 0; i < waveIndex; i++) {
                 Instantiate(enemyPrefabs[0], pos, rot);
                 enemyCount++;
