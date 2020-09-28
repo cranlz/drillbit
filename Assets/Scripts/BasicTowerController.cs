@@ -110,7 +110,7 @@ public class BasicTowerController : MonoBehaviour
         if (health <= 0 && !markedForDeletion)
         {
             markedForDeletion = true;
-            //killer.GetComponent<BasicTowerController>().targets.Remove(gameObject);
+            killer.GetComponent<BasicEnemyController>().updateDestination(gameObject);
             Destroy(gameObject);
         }
     }

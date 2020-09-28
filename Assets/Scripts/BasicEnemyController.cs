@@ -19,12 +19,13 @@ public class BasicEnemyController : MonoBehaviour
 
     void Start()
     {
+        currentTarget = null;
         agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(SetNewTarget().transform.position);
         sprite = spriteObject.GetComponent<SpriteRenderer>();
         InvokeRepeating("Attack", 0, attackRate);
         waveManager = GameObject.Find("WaveManager");
         waveM = waveManager.GetComponent<WaveManager>();
+        updateDestination(currentTarget);
     }
 
     public void Damage(int damageAmount, GameObject killer)
@@ -42,12 +43,17 @@ public class BasicEnemyController : MonoBehaviour
         }
     }
 
-    private GameObject SetNewTarget()
+    public GameObject SetNewTarget(GameObject tower)
     {
         var distance = float.MaxValue;
         var towers = GameObject.FindGameObjectsWithTag("construct");
         foreach (var i in towers)
             {
+                if(i == tower)
+                {
+                    Debug.Log("Detected Current Target");
+                    continue;
+                }
                 var diff = i.transform.position - transform.position;
                 var curDistance = diff.sqrMagnitude;
                 if (curDistance < distance)
@@ -57,6 +63,11 @@ public class BasicEnemyController : MonoBehaviour
                 }
             }
         return currentTarget;
+    }
+
+    public void updateDestination(GameObject target)
+    {
+        agent.SetDestination(SetNewTarget(target).transform.position);
     }
 
     public void Attack()

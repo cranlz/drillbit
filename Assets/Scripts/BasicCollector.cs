@@ -35,6 +35,9 @@ public class BasicCollector : MonoBehaviour
         {
             markedForDeletion = true;
             //killer.GetComponent<BasicTowerController>().targets.Remove(gameObject);
+            bank = -100;
+            GameObject waveManager = GameObject.Find("WaveManager");
+            waveManager.SetActive(false);
             gameObject.SetActive(false);
         }
     }
