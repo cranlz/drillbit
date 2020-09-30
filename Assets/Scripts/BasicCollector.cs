@@ -7,7 +7,8 @@ public class BasicCollector : MonoBehaviour
 {
     public float rateOfCollection = 1.0f;
     public int collectionAmount = 1;
-    public static int bank = 10;
+    public static int bank;
+    public int bankInit = 10;
     public GameObject text;
     private TextMeshPro textMesh;
     public float health = 10f;
@@ -15,6 +16,7 @@ public class BasicCollector : MonoBehaviour
 
     void Start()
     {
+        bank = bankInit;
         textMesh = text.GetComponent<TextMeshPro>();
         InvokeRepeating("Collect", rateOfCollection, rateOfCollection);
     }

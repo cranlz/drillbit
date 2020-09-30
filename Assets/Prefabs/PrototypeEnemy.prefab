@@ -230,6 +230,7 @@ MonoBehaviour:
   attackRate: 0.5
   damage: 1
   spriteObject: {fileID: 2656856309070730345}
+  waveManager: {fileID: 0}
 --- !u!195 &8281063204035625130
 NavMeshAgent:
   m_ObjectHideFlags: 0

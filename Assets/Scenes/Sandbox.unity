@@ -6160,6 +6160,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Collector
       objectReference: {fileID: 0}
+    - target: {fileID: 2838120320787575487, guid: 41c7dceb486c5264b8f57c1396be3af3,
+        type: 3}
+      propertyPath: rateOfCollection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2838120320787575487, guid: 41c7dceb486c5264b8f57c1396be3af3,
+        type: 3}
+      propertyPath: collectionAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2838120320787575487, guid: 41c7dceb486c5264b8f57c1396be3af3,
+        type: 3}
+      propertyPath: bankInit
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8976345086446480592, guid: 41c7dceb486c5264b8f57c1396be3af3,
         type: 3}
       propertyPath: m_LocalPosition.x

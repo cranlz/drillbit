@@ -25,7 +25,7 @@ public class BasicEnemyController : MonoBehaviour
         InvokeRepeating("Attack", 0, attackRate);
         waveManager = GameObject.Find("WaveManager");
         waveM = waveManager.GetComponent<WaveManager>();
-        updateDestination(currentTarget);
+        SetNewTarget();
     }
 
     public void Damage(int damageAmount, GameObject killer)
@@ -38,18 +38,18 @@ public class BasicEnemyController : MonoBehaviour
             killer.GetComponent<BasicTowerController>().targets.Remove(gameObject);
             WaveManager.enemyCount--;
             waveM.updateEnemyUI();
-            BasicCollector.bank += 2;
+            //BasicCollector.bank += 1;
             Destroy(gameObject);
         }
     }
 
-    public GameObject SetNewTarget(GameObject tower)
+    public GameObject SetNewTarget(GameObject tower = null)
     {
         var distance = float.MaxValue;
         var towers = GameObject.FindGameObjectsWithTag("construct");
         foreach (var i in towers)
             {
-                if(i == tower)
+                if(tower != null && i == tower)
                 {
                     Debug.Log("Detected Current Target");
                     continue;
@@ -62,12 +62,8 @@ public class BasicEnemyController : MonoBehaviour
                     distance = curDistance;
                 }
             }
+        agent.SetDestination(currentTarget.transform.position);
         return currentTarget;
-    }
-
-    public void updateDestination(GameObject target)
-    {
-        agent.SetDestination(SetNewTarget(target).transform.position);
     }
 
     public void Attack()

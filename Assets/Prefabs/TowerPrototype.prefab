@@ -214,7 +214,7 @@ MonoBehaviour:
   rateOfFire: 1
   maxFireAngle: 10
   range: 50
-  health: 10
+  health: 5
   markedForDeletion: 0
 --- !u!135 &4006873068114912606
 SphereCollider:
