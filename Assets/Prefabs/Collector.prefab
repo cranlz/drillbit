@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2043301519}
   - component: {fileID: 2043301518}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 6537311198429837276}
   - component: {fileID: 6788188152722771771}
   - component: {fileID: 4912127767809971299}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: thingy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 8458547427541581761}
   - component: {fileID: 3753494660543306160}
   - component: {fileID: 2838120320787575487}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Collector
   m_TagString: construct
   m_Icon: {fileID: 0}
@@ -297,6 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rateOfCollection: 1
   collectionAmount: 1
+  bankInit: 10
   text: {fileID: 2163319923560405870}
   health: 10
   markedForDeletion: 0
@@ -312,7 +313,7 @@ GameObject:
   - component: {fileID: 6794597648444845699}
   - component: {fileID: 7557763912826586128}
   - component: {fileID: 7786983981969220059}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BankNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}

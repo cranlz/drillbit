@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using Pathfinding;
 
 public class PlayerController : MonoBehaviour
 {
     public LayerMask whatCanBeClickedOn;
-    private NavMeshAgent agent;
+    IAstarAI ai;
     public GameObject[] towers;
     public int towerCost = 5;
     private Transform buildPreview;
@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour
     public float stepTime = 0.05f;
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        ai = GetComponent<IAstarAI>();
+        if (ai != null) ai.onSearchPath += Update;
         buildPreview = transform.Find("BuildPreview");
         animator = sprite.GetComponent<Animator>();
         spriteRenderer = sprite.GetComponent<SpriteRenderer>();
@@ -27,17 +28,17 @@ public class PlayerController : MonoBehaviour
     void Update() {
 
         stepTime -= Time.deltaTime;
-        if (stepTime <= 0 && agent.velocity.magnitude > 0) {
+        if (stepTime <= 0 && ai.velocity.magnitude > 0) {
             stepTime = 0.05f;
             spriteParticles.Play();
         }
 
 
-        animator.SetFloat("speed", agent.velocity.magnitude / agent.speed);
+        animator.SetFloat("speed", ai.velocity.magnitude / ai.maxSpeed);
         bool isLeft;
-        if (agent.velocity.x == 0) {
+        if (ai.velocity.x == 0) {
             isLeft = spriteRenderer.flipX;
-        } else if (agent.velocity.x < 0) {
+        } else if (ai.velocity.x < 0) {
             isLeft = true;
         } else isLeft = false;
         spriteRenderer.flipX = isLeft;
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(0)) {
             if (Physics.Raycast(myRay, out hit, 100, whatCanBeClickedOn)) {
-                agent.SetDestination(hit.point);
+                if (ai != null) ai.destination = hit.point;
             }
         }
 
