@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using Pathfinding;
 
 public class BasicEnemyController : MonoBehaviour
 {
 
     public int health = 1;
-    private NavMeshAgent agent;
+    private IAstarAI ai;
     public GameObject currentTarget;
     private bool markedForDeletion = false;
     public float attackRate = 0.5f;
@@ -20,7 +20,7 @@ public class BasicEnemyController : MonoBehaviour
     void Start()
     {
         currentTarget = null;
-        agent = GetComponent<NavMeshAgent>();
+        ai = GetComponent<IAstarAI>();
         sprite = spriteObject.GetComponent<SpriteRenderer>();
         InvokeRepeating("Attack", 0, attackRate);
         waveManager = GameObject.Find("WaveManager");
@@ -62,7 +62,7 @@ public class BasicEnemyController : MonoBehaviour
                     distance = curDistance;
                 }
             }
-        agent.SetDestination(currentTarget.transform.position);
+        if (ai != null) ai.destination = currentTarget.transform.position;
         return currentTarget;
     }
 
@@ -86,9 +86,9 @@ public class BasicEnemyController : MonoBehaviour
             }
         }
         bool isLeft;
-        if (agent.velocity.x == 0) {
+        if (ai.velocity.x == 0) {
             isLeft = sprite.flipX;
-        } else if (agent.velocity.x < 0) {
+        } else if (ai.velocity.x < 0) {
             isLeft = true;
         } else isLeft = false;
         sprite.flipX = isLeft;

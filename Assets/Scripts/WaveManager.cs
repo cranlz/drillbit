@@ -26,6 +26,7 @@ public class WaveManager : MonoBehaviour
             //Start new wave
             Debug.Log("Starting wave " + waveIndex);
             var pos = RandomCircle(Vector3.zero, 50f);
+            pos.y = 1;
             var rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero);
             waveIndex++;
             updateWaveUI();
