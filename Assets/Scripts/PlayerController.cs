@@ -55,9 +55,10 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && BasicCollector.bank >= towerCost) {
                 Instantiate(towers[0], buildPreview.position, buildPreview.rotation);
                 BasicCollector.bank -= towerCost;
+                Debug.Log("made tower");
             }
         }
-        else if (Input.GetMouseButtonDown(0)) {
+        else if (Input.GetMouseButton(0)) {
             if (Physics.Raycast(myRay, out hit, 100, whatCanBeClickedOn)) {
                 if (ai != null) ai.destination = hit.point;
             }
