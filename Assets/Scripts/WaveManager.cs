@@ -32,6 +32,8 @@ public class WaveManager : MonoBehaviour
             //start coroutine spawning enemies
             enemyCount = 0;
             for (var i = 0; i < Mathf.Pow(waveIndex, enemyGrowthRate); i++) {
+                pos.x += Random.Range(-2f, 2f);
+                pos.z += Random.Range(-2f, 2f);
                 Instantiate(enemyPrefabs[0], pos, rot);
                 enemyCount++;
                 updateEnemyUI();
