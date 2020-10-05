@@ -52,9 +52,9 @@ public class PlayerController : MonoBehaviour
                 lookPos.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookPos);
             }
-            if (Input.GetMouseButtonDown(0) && BasicCollector.bank >= towerCost) {
+            if (Input.GetMouseButtonDown(0) && ConCollector.bank >= towerCost) {
                 Instantiate(towers[0], buildPreview.position, buildPreview.rotation);
-                BasicCollector.bank -= towerCost;
+                ConCollector.bank -= towerCost;
                 Debug.Log("made tower");
             }
         }

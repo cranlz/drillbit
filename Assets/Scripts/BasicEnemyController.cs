@@ -66,8 +66,11 @@ public class BasicEnemyController : MonoBehaviour
         return currentTarget;
     }
 
+    //should be called whenever our target is within range
     public void Attack()
     {
+        //instead of doing all this, we really only need to deal a set amount
+        //of damage to our target when in range. no need for raycasting.
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2f))
         {
@@ -85,6 +88,9 @@ public class BasicEnemyController : MonoBehaviour
                 Debug.Log("hit " + hit.collider.gameObject.name);
             }
         }
+
+        //make sprite face the right way
+        //should only need to be called when target changes!
         bool isLeft;
         if (ai.velocity.x == 0) {
             isLeft = sprite.flipX;

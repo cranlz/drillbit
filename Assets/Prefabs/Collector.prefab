@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 5144158461299088670}
   - component: {fileID: 8458547427541581761}
   - component: {fileID: 3753494660543306160}
-  - component: {fileID: 2838120320787575487}
+  - component: {fileID: 8187845433834440202}
   m_Layer: 10
   m_Name: Collector
   m_TagString: construct
@@ -283,7 +283,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2838120320787575487
+--- !u!114 &8187845433834440202
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,15 +292,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 503402269740680929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40745a28e6b19724fb2c1863e4938c44, type: 3}
+  m_Script: {fileID: 11500000, guid: 61ef43e4435288a49b86d9bdab1c43e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 10
+  markedForDeletion: 0
+  setupTime: 1
   rateOfCollection: 1
   collectionAmount: 1
-  bankInit: 10
   text: {fileID: 2163319923560405870}
-  health: 10
-  markedForDeletion: 0
 --- !u!1 &2163319923560405870
 GameObject:
   m_ObjectHideFlags: 0

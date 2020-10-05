@@ -31,6 +31,7 @@ public class Hostile : MonoBehaviour
         // negative, destroy it
         if (hp <= 0 && !markedForDeletion) {
             markedForDeletion = true;
+            WaveManager.enemyCount -= 1;
             Destroy(gameObject);
         }
     }
