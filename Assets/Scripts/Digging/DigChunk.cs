@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DigChunk : MonoBehaviour
 {
+    //haha temp
     //Is the chunk dug out?
     public bool state;
     //X, Z position in grid
