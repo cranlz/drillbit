@@ -1,0 +1,44 @@
+[submodule "Extensions"]
+	path = Extensions
+	url = https://github.com/eppz/Unity.Library.eppz.Extensions
+	branch = master
+[submodule "Easing"]
+	path = Easing
+	url = https://github.com/eppz/Unity.Library.eppz.Easing
+	branch = master
+[submodule "Utils"]
+	path = Utils
+	url = https://github.com/eppz/Unity.Library.eppz.Utils
+	branch = master
+[submodule "Meshes"]
+	path = Meshes
+	url = https://github.com/eppz/Unity.Library.eppz.Meshes
+	branch = master
+[submodule "Geometry"]
+	path = Geometry
+	url = https://github.com/eppz/Unity.Library.eppz.Geometry
+	branch = master
+[submodule "Lines"]
+	path = Lines
+	url = https://github.com/eppz/Unity.Library.eppz.Lines
+	branch = master
+[submodule "Persistence"]
+	path = Persistence
+	url = https://github.com/eppz/Unity.Library.eppz.Persistence
+	branch = master
+[submodule "Cloud"]
+	path = Cloud
+	url = https://github.com/eppz/Unity.Library.eppz.Cloud
+	branch = master
+[submodule "Rate"]
+	path = Rate
+	url = https://github.com/eppz/Unity.Library.eppz.Rate
+	branch = master
+[submodule "DeepLink"]
+	path = DeepLink
+	url = https://github.com/eppz/Unity.Library.eppz.DeepLink
+	branch = master
+[submodule "Networking"]
+	path = Networking
+	url = https://github.com/eppz/Unity.Library.eppz.Networking
+	branch = master
