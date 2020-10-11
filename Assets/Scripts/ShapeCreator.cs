@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sebastian.Geometry;
 
 public class ShapeCreator : MonoBehaviour {
     public MeshFilter meshFilter;
@@ -13,11 +14,7 @@ public class ShapeCreator : MonoBehaviour {
     public float handleRadius = .1f;
 
     public void UpdateMeshDisplay() {
-
+        CompositeShape compShape = new CompositeShape(shapes);
+        meshFilter.mesh = compShape.GetMesh();
     }
-}
-
-[System.Serializable]
-public class Shape {
-    public List<Vector3> points = new List<Vector3>();
 }

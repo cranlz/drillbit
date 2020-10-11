@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Sebastian.Geometry;
 
 [CustomEditor(typeof(ShapeCreator))]
 public class ShapeEditor : Editor {
@@ -53,7 +54,6 @@ public class ShapeEditor : Editor {
             HandleInput(guiEvent);
             if (shapeChangedSinceLastRepaint) {
                 HandleUtility.Repaint();
-                shapeChangedSinceLastRepaint = false;
             }
         }
     }
