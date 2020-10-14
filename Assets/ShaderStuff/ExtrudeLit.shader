@@ -7,7 +7,6 @@
     {
         HLSLINCLUDE
 
-
         struct GeomData 
         {
             float4 positionCS               : SV_POSITION;
@@ -23,12 +22,15 @@
 
         float _Factor;
 
-        
+        /*        
         //This is a replacement for the old 'UnityObjectToClipPos()'
-        float4 ObjectToClipPos (float3 pos)
+        float4 ObjectToClipPos (float3 pos, float3 posWS)
         {
-            return mul (UNITY_MATRIX_VP, mul (UNITY_MATRIX_M, float4 (pos,1)));
+            //return mul (unity_MatrixVP, mul (posWS, pos));
+            return float4 (1, 1, 1, 1);
         }
+        */
+        
 
         //This is where the magic happens
         [maxvertexcount(24)]
@@ -42,7 +44,16 @@
             //Move our original triangle up by _Factor amount
             for(int i = 0; i < 3; i++)
             {
-                o.positionCS = UnityObjectToClipPos(IN[i].positionCS + float4(normalFace, 0) * _Factor);
+                o.positionCS = IN[i].positionCS;
+                o.positionCS.x = 5;
+                o.positionWS = IN[i].positionWS;
+                o.normalWS = IN[i].normalWS;
+                o.tangentWS = IN[i].tangentWS;
+                o.viewDirectionWS = IN[i].viewDirectionWS;
+                o.lightmapUV = IN[i].lightmapUV;
+                o.sh = IN[i].sh;
+                o.fogFactorAndVertexLight = IN[i].fogFactorAndVertexLight;
+                o.shadowCoord = IN[i].shadowCoord;
                 triStream.Append(o);
             }
             triStream.RestartStrip();
@@ -133,6 +144,7 @@
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
             #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/ShaderVariablesFunctions.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
         
             // --------------------------------------------------
             // Graph
@@ -438,6 +450,7 @@
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
             #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/ShaderVariablesFunctions.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
         
             // --------------------------------------------------
             // Graph
@@ -686,6 +699,7 @@
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
             #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/ShaderVariablesFunctions.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
         
             // --------------------------------------------------
             // Graph
@@ -936,6 +950,7 @@
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/MetaInput.hlsl"
             #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/ShaderVariablesFunctions.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
         
             // --------------------------------------------------
             // Graph
@@ -1190,6 +1205,7 @@
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
             #include "Packages/com.unity.shadergraph/ShaderGraphLibrary/ShaderVariablesFunctions.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
         
             // --------------------------------------------------
             // Graph

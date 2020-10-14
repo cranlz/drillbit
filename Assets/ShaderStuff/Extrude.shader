@@ -109,7 +109,7 @@
                 {
                     o.pos = UnityObjectToClipPos(IN[i].vertex + float4(normalFace, 0) * _Factor);
                     o.uv = IN[i].uv;
-                    o.col = fixed4(1., 1., 1., 1.);
+                    o.col = fixed4(0., 0., 0., 1.);
                     tristream.Append(o);
                 }
                 tristream.RestartStrip();
