@@ -8,7 +8,9 @@ using Pathfinding;
 public class ShapeCreator : MonoBehaviour {
     public MeshFilter meshFilterHoles;
     public MeshFilter meshFilterSolid;
-    public Path path;
+    public AstarPath path;
+
+    public bool updateAIGraph = false;
 
     [HideInInspector]
     public List<Shape> shapes = new List<Shape>();
@@ -34,6 +36,6 @@ public class ShapeCreator : MonoBehaviour {
         meshFilterSolid.gameObject.GetComponent<MeshCollider>().sharedMesh = null;
         meshFilterSolid.gameObject.GetComponent<MeshCollider>().sharedMesh = meshFilterSolid.sharedMesh;
 
-        path.active.Scan();
+        if (updateAIGraph) path.Scan();
     }
 }
