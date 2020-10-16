@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using Sebastian.Geometry;
 
 public class ShapeCreator : MonoBehaviour {
-    public MeshFilter meshFilter;
+    public MeshFilter meshFilterHoles;
+    public MeshFilter meshFilterSolid;
 
     [HideInInspector]
     public List<Shape> shapes = new List<Shape>();
@@ -14,7 +16,12 @@ public class ShapeCreator : MonoBehaviour {
     public float handleRadius = .1f;
 
     public void UpdateMeshDisplay() {
-        CompositeShape compShape = new CompositeShape(shapes);
-        meshFilter.mesh = compShape.GetMesh();
+        CompositeHoleShape compHoleShape = new CompositeHoleShape(shapes);
+        meshFilterHoles.mesh = compHoleShape.GetMesh();
+        AssetDatabase.CreateAsset( compHoleShape.GetMesh(), "Assets/Resources/HoleMesh.asset" );
+        AssetDatabase.SaveAssets();
+
+        CompositeSolidShape compSolidShape = new CompositeSolidShape(shapes);
+        meshFilterSolid.mesh = compSolidShape.GetMesh();
     }
 }

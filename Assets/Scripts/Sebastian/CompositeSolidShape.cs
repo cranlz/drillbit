@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Sebastian.Geometry
 {
-    public partial class CompositeShape
+    public partial class CompositeSolidShape
     {
         public Vector3[] vertices;
         public int[] triangles;
@@ -19,7 +19,7 @@ namespace Sebastian.Geometry
         Shape[] shapes;
         float height = 0;
 
-        public CompositeShape(IEnumerable<Shape> shapes)
+        public CompositeSolidShape(IEnumerable<Shape> shapes)
         {
             this.shapes = shapes.ToArray();
         }
@@ -39,7 +39,7 @@ namespace Sebastian.Geometry
         public void Process()
         {
             // Generate array of valid shape data
-            CompositeShapeData[] eligibleShapes = shapes.Select(x => new CompositeShapeData(x.points.ToArray())).Where(x => x.IsValidShape).ToArray();
+            CompositeSolidShapeData[] eligibleShapes = shapes.Select(x => new CompositeSolidShapeData(x.points.ToArray())).Where(x => x.IsValidShape).ToArray();
 
             // Set parents for all shapes. A parent is a shape which completely contains another shape.
             for (int i = 0; i < eligibleShapes.Length; i++)
@@ -57,17 +57,17 @@ namespace Sebastian.Geometry
             }
 
             // Holes are shapes with an odd number of parents.
-            CompositeShapeData[] holeShapes = eligibleShapes.Where(x => x.parents.Count % 2 != 0).ToArray();
-            foreach (CompositeShapeData holeShape in holeShapes)
+            CompositeSolidShapeData[] holeShapes = eligibleShapes.Where(x => x.parents.Count % 2 != 0).ToArray();
+            foreach (CompositeSolidShapeData holeShape in holeShapes)
             {
                 // The most immediate parent (i.e the smallest parent shape) will be the one that has the highest number of parents of its own. 
-                CompositeShapeData immediateParent = holeShape.parents.OrderByDescending(x => x.parents.Count).First();
+                CompositeSolidShapeData immediateParent = holeShape.parents.OrderByDescending(x => x.parents.Count).First();
                 immediateParent.holes.Add(holeShape);
             }
 
             // Solid shapes have an even number of parents
-            CompositeShapeData[] solidShapes = eligibleShapes.Where(x => x.parents.Count % 2 == 0).ToArray();
-            foreach (CompositeShapeData solidShape in solidShapes)
+            CompositeSolidShapeData[] solidShapes = eligibleShapes.Where(x => x.parents.Count % 2 == 0).ToArray();
+            foreach (CompositeSolidShapeData solidShape in solidShapes)
             {
                 solidShape.ValidateHoles();
 

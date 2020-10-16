@@ -4,24 +4,24 @@ using System.Linq;
 
 namespace Sebastian.Geometry
 {
-    public partial class CompositeShape
+    public partial class CompositeSolidShape
     {
 
         /*
          * Holds data for each shape needed when calculating composite shapes.
          */
 
-        public class CompositeShapeData
+        public class CompositeSolidShapeData
         {
             public readonly Vector2[] points;
             public readonly Polygon polygon;
             public readonly int[] triangles;
 
-            public List<CompositeShapeData> parents = new List<CompositeShapeData>();
-            public List<CompositeShapeData> holes = new List<CompositeShapeData>();
+            public List<CompositeSolidShapeData> parents = new List<CompositeSolidShapeData>();
+            public List<CompositeSolidShapeData> holes = new List<CompositeSolidShapeData>();
             public bool IsValidShape { get; private set; }
 
-            public CompositeShapeData(Vector3[] points)
+            public CompositeSolidShapeData(Vector3[] points)
             {
                 this.points = points.Select(v => new Vector2(v.x,v.z)).ToArray();
                 IsValidShape = points.Length >= 3 && !IntersectsWithSelf();
@@ -61,7 +61,7 @@ namespace Sebastian.Geometry
             }
 
             // A parent is a shape which fully contains another shape
-            public bool IsParentOf(CompositeShapeData otherShape)
+            public bool IsParentOf(CompositeSolidShapeData otherShape)
             {
                 if (otherShape.parents.Contains(this))
                 {
@@ -109,7 +109,7 @@ namespace Sebastian.Geometry
             }
 
             // Test if the shapes overlap partially (test will fail if one shape entirely contains other shape, i.e. one is parent of the other).
-            public bool OverlapsPartially(CompositeShapeData otherShape)
+            public bool OverlapsPartially(CompositeSolidShapeData otherShape)
             {
 
                 // Check for intersections between line segs of this shape and otherShape (any intersection will validate the overlap test)
