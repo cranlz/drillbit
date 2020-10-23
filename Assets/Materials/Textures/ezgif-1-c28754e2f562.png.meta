@@ -1,25 +1,34 @@
 fileFormatVersion: 2
-guid: a542ff6abe5a9c04793025eb3edc7eac
+guid: d51bf1ba0f35ee04a97a1fcfccbdac45
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1165317309176959439
-    second: Roach2_0
+      213: 4962066255438816362
+    second: ezgif-1-c28754e2f562_0
   - first:
-      213: 87524782378964539
-    second: Roach2_1
+      213: 6394587281988371169
+    second: ezgif-1-c28754e2f562_1
   - first:
-      213: -8071271140477788418
-    second: Roach2_2
+      213: 5778071346424638693
+    second: ezgif-1-c28754e2f562_0
   - first:
-      213: -8245270643835684901
-    second: Roach2_3
+      213: 2335705926813748021
+    second: ezgif-1-c28754e2f562_2
   - first:
-      213: -1283927727740874757
-    second: Roach2_4
+      213: -398833442273832597
+    second: ezgif-1-c28754e2f562_3
   - first:
-      213: 4812405604169006598
-    second: Roach2_5
+      213: 8398154450640608245
+    second: ezgif-1-c28754e2f562_4
+  - first:
+      213: -6474419055233519669
+    second: ezgif-1-c28754e2f562_5
+  - first:
+      213: 8524610390694170939
+    second: ezgif-1-c28754e2f562_6
+  - first:
+      213: 7056257522144389792
+    second: ezgif-1-c28754e2f562_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -153,13 +162,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Roach2_0
+      name: ezgif-1-c28754e2f562_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 30
         y: 0
-        width: 28
-        height: 18
+        width: 280
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,20 +176,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc15b182be90c2010800000000000000
-      internalID: 1165317309176959439
+      spriteID: 5ece08aa645df2050800000000000000
+      internalID: 5778071346424638693
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roach2_1
+      name: ezgif-1-c28754e2f562_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 350
         y: 0
-        width: 28
-        height: 18
+        width: 280
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,20 +197,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b36ddba6353f63100800000000000000
-      internalID: 87524782378964539
+      spriteID: 1e2c524c0432eb850800000000000000
+      internalID: 6394587281988371169
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roach2_2
+      name: ezgif-1-c28754e2f562_2
       rect:
         serializedVersion: 2
-        x: 66
+        x: 670
         y: 0
-        width: 28
-        height: 18
+        width: 280
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -209,20 +218,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: efe95f149a51dff80800000000000000
-      internalID: -8071271140477788418
+      spriteID: 53b02835a281a6020800000000000000
+      internalID: 2335705926813748021
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roach2_3
+      name: ezgif-1-c28754e2f562_3
       rect:
         serializedVersion: 2
-        x: 99
+        x: 980
         y: 0
-        width: 27
-        height: 19
+        width: 290
+        height: 190
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,20 +239,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd7b735e80ae29d80800000000000000
-      internalID: -8245270643835684901
+      spriteID: b61d8bce81f077af0800000000000000
+      internalID: -398833442273832597
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roach2_4
+      name: ezgif-1-c28754e2f562_4
       rect:
         serializedVersion: 2
-        x: 130
+        x: 1310
         y: 0
-        width: 28
-        height: 18
+        width: 280
+        height: 190
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -251,20 +260,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bff0bbeb8829e2ee0800000000000000
-      internalID: -1283927727740874757
+      spriteID: 5fb9c4f3afc3c8470800000000000000
+      internalID: 8398154450640608245
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Roach2_5
+      name: ezgif-1-c28754e2f562_5
       rect:
         serializedVersion: 2
-        x: 162
+        x: 1630
         y: 0
-        width: 28
-        height: 18
+        width: 280
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -272,8 +281,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60eb797566919c240800000000000000
-      internalID: 4812405604169006598
+      spriteID: bcf29c51c2e3626a0800000000000000
+      internalID: -6474419055233519669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ezgif-1-c28754e2f562_6
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 0
+        width: 280
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b311ee92cff7d4670800000000000000
+      internalID: 8524610390694170939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ezgif-1-c28754e2f562_7
+      rect:
+        serializedVersion: 2
+        x: 2260
+        y: 0
+        width: 290
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0aa281ba4dcdce160800000000000000
+      internalID: 7056257522144389792
       vertices: []
       indices: 
       edges: []
@@ -281,7 +332,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 613162bf05e7a8e47bdd92b568dd343e
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
