@@ -38,33 +38,4 @@ public class ShapeCreator : MonoBehaviour {
 
         if (updateAIGraph) path.Scan();
     }
-
-    private void OnMouseUp()
-    {
-        //var cookieCutter = List<IntPoint>
-    }
-
-    //Convert our polygon to a list of IntPoints
-    public List<IntPoint> ShapeToPath(Shape shape) {
-        var points = new List<IntPoint>();
-        for(var i = 0; i < shape.points.Count; i++) {
-            points.Add(new IntPoint(shape.points[i].x, shape.points[i].z));
-        }
-        return points;
-    }
-
-    //Convert a list of IntPoints back to a shape
-    public Shape PathToShape(List<IntPoint> points) {
-        var shape = new Shape();
-        for(var i = 0; i < points.Count; i++) {
-            shape.points.Add(new Vector3(points[i].X, 0f, points[i].Y));
-        }
-        return shape;
-    }
-
-    /*
-    public Paths ClipperSolution(ClipType type, ) {
-
-    }
-    */
 }
