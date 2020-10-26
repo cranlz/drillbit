@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sebastian.Geometry;
 using ClipperLib;
+using Pathfinding;
 using System.Runtime;
 
 public class DigFromCave : MonoBehaviour {
@@ -11,6 +12,7 @@ public class DigFromCave : MonoBehaviour {
     public float circAng = 10f;
     public float circRad = 5f;
     public bool snip = false;
+    public AstarPath path;
 
     private void Start() {
 
@@ -28,6 +30,11 @@ public class DigFromCave : MonoBehaviour {
             ang += circAng;
         }
 
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            snip = true;
+        }
+
         if (snip) {
             snip = false;
             var shapeToCut = ShapeToPath(caveMeshes.shapes[1]);
@@ -43,6 +50,11 @@ public class DigFromCave : MonoBehaviour {
 
             caveMeshes.shapes[1] = PathToShape(solution[0]);
             caveMeshes.UpdateMeshDisplay();
+
+            var bounds = GetComponent<Collider>().bounds;
+            var guo = new GraphUpdateObject(bounds);
+            guo.updatePhysics = true;
+            AstarPath.active.UpdateGraphs(guo);
         }
     }
 

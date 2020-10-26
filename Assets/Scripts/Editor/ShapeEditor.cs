@@ -226,12 +226,12 @@ public class ShapeEditor : Editor {
                     Handles.color = Color.red;
                     Handles.DrawLine(shapeToDraw.points[i],nextPoint);
                 } else {
-                    Handles.color = (shapeIsSelected)? Color.black : deselectedShapeColor;
+                    Handles.color = (shapeIsSelected)? Color.white : deselectedShapeColor;
                     Handles.DrawDottedLine(shapeToDraw.points[i],nextPoint,4);
                 }
                 
                 if (i == selectionInfo.pointIndex && mouseIsOverShape) {
-                    Handles.color = (selectionInfo.pointIsSelected)?Color.black : Color.red;
+                    Handles.color = (selectionInfo.pointIsSelected)?Color.white : Color.red;
                 } else Handles.color = (shapeIsSelected)? Color.white : deselectedShapeColor;
                 Handles.DrawSolidDisc(shapeToDraw.points[i], Vector3.up, shapeCreator.handleRadius);
             }
