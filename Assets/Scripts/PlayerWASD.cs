@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerWASD : MonoBehaviour {
     public LayerMask whatCanBeClickedOn;
-    IAstarAI ai;
     public GameObject[] towers;
     public int towerCost = 5;
     private Transform buildPreview;
@@ -15,30 +12,31 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private ParticleSystem spriteParticles;
     public float stepTime = 0.05f;
-    void Start()
-    {
-        ai = GetComponent<IAstarAI>();
-        if (ai != null) ai.onSearchPath += Update;
+    private CharacterController controller;
+    public float speed = 2f;
+
+    void Start() {
         buildPreview = transform.Find("BuildPreview");
         animator = sprite.GetComponent<Animator>();
         spriteRenderer = sprite.GetComponent<SpriteRenderer>();
         spriteParticles = sprite.GetComponent<ParticleSystem>();
+        controller = GetComponent<CharacterController>();
     }
 
     void Update() {
 
         stepTime -= Time.deltaTime;
-        if (stepTime <= 0 && ai.velocity.magnitude > 0) {
+        if (stepTime <= 0 && controller.velocity.magnitude > 0) {
             stepTime = 0.05f;
             spriteParticles.Play();
         }
 
 
-        animator.SetFloat("speed", ai.velocity.magnitude / ai.maxSpeed);
+        animator.SetFloat("speed", controller.velocity.magnitude / speed);
         bool isLeft;
-        if (ai.velocity.x == 0) {
+        if (controller.velocity.x == 0) {
             isLeft = spriteRenderer.flipX;
-        } else if (ai.velocity.x < 0) {
+        } else if (controller.velocity.x < 0) {
             isLeft = true;
         } else isLeft = false;
         spriteRenderer.flipX = isLeft;
@@ -53,16 +51,15 @@ public class PlayerController : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(lookPos);
             }
             if (Input.GetMouseButtonDown(0) && ConCollector.bank >= towerCost) {
-                Instantiate(towers[0], buildPreview.position, buildPreview.rotation);
+                var newTower = Instantiate(towers[0], buildPreview.position, buildPreview.rotation);
                 ConCollector.bank -= towerCost;
+                Camera.main.GetComponent<CameraManager>().targets.Add(newTower.transform);
                 Debug.Log("made tower");
             }
         }
-        else if (Input.GetMouseButton(0)) {
-            if (Physics.Raycast(myRay, out hit, 100, whatCanBeClickedOn)) {
-                if (ai != null) ai.destination = hit.point;
-            }
-        }
+
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+        controller.Move(move * Time.deltaTime * speed);
 
 
         if (Input.GetMouseButtonDown(1)) {
