@@ -58,8 +58,12 @@ public class PlayerWASD : MonoBehaviour {
             }
         }
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-        controller.Move(move * Time.deltaTime * speed);
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), -2, Input.GetAxis("Vertical")).normalized * 2;
+        Debug.DrawRay(gameObject.transform.position, move);
+        int layerMask = 1 << 10;
+        if (!Physics.Raycast(gameObject.transform.position, move, 5f, layerMask)) {
+            controller.Move(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized * Time.deltaTime * speed);
+        } else Debug.Log("Hit wall");
 
 
         if (Input.GetMouseButtonDown(1)) {

@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ExtrudeMat
-  m_Shader: {fileID: 4800000, guid: 128264c4dee543944b5cc27a27a06385, type: 3}
+  m_Shader: {fileID: 4800000, guid: 3997016502c56964085465e019f798c4, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
