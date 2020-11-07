@@ -6044,6 +6044,7 @@ GameObject:
   - component: {fileID: 1124796875}
   - component: {fileID: 1124796874}
   - component: {fileID: 1124796880}
+  - component: {fileID: 1124796882}
   - component: {fileID: 1124796872}
   - component: {fileID: 1124796879}
   - component: {fileID: 1124796873}
@@ -6248,12 +6249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc4ef14ba0dda5848ac6042472ff6ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatCanBeClickedOn:
-    serializedVersion: 2
-    m_Bits: 256
-  towers:
-  - {fileID: 4006873068114912605, guid: 56a593bac69253743b137dcb44be1e05, type: 3}
-  towerCost: 5
   sprite: {fileID: 78361636}
   stepTime: 0.05
   speed: 15
@@ -6279,6 +6274,25 @@ MonoBehaviour:
   bezierTangentLength: 0.4
   offset: 0.2
   factor: 0.1
+--- !u!114 &1124796882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124796871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbee746f9ec5452418294842dcab0f1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatCanBeClickedOn:
+    serializedVersion: 2
+    m_Bits: 256
+  constructs:
+  - {fileID: 4006873068114912605, guid: 56a593bac69253743b137dcb44be1e05, type: 3}
+  - {fileID: 503402269740680929, guid: 41c7dceb486c5264b8f57c1396be3af3, type: 3}
+  towerCost: 5
 --- !u!1 &1329099657
 GameObject:
   m_ObjectHideFlags: 0
