@@ -6,12 +6,10 @@ using UnityEngine;
 public class playerConstruction : MonoBehaviour {
     public LayerMask whatCanBeClickedOn;
     //What are we able to build?
-    public GameObject[] constructs;
-    //Break this up into a per-tower basis
-    public int towerCost = 5;
+    public constructType[] constructs;
 
     private Transform buildPreview;
-    private GameObject currentConstruct;
+    private constructType currentConstruct;
 
     private void Start() {
         buildPreview = transform.Find("BuildPreview");
@@ -19,6 +17,7 @@ public class playerConstruction : MonoBehaviour {
     }
 
     void Update() {
+        //Switch whatever construct we want with num keys
         var num = getNumDown();
         if (num > -1) {
             currentConstruct = constructs[(num - 1) % constructs.Length];
@@ -27,22 +26,38 @@ public class playerConstruction : MonoBehaviour {
         Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Input.GetMouseButton(1)) {
-            //rotate to mouse
+            //Show build preview
+            //Rotate to mouse
             if (Physics.Raycast(myRay, out hit, 100, whatCanBeClickedOn)) {
                 var lookPos = hit.point - transform.position;
                 lookPos.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookPos);
             }
-            if (Input.GetMouseButtonDown(0) && ConCollector.bank >= towerCost) {
-                var newTower = Instantiate(currentConstruct, buildPreview.position, buildPreview.rotation);
-                ConCollector.bank -= towerCost;
-                Camera.main.GetComponent<CameraManager>().targets.Add(newTower.transform);
-                Debug.Log("made tower");
+            if (Input.GetMouseButtonDown(0) && ConCollector.bank >= currentConstruct.cost) {
+                //Build our new construct
+                //Handle position stuff here
+
+                GameObject newTower;
+                //If the construct is a collector, make sure it is on a resource deposit
+                if (currentConstruct.tag == "collector") {
+                    var deposit = closestDeposit();
+                    if (deposit != null && (deposit.transform.position - buildPreview.position).sqrMagnitude < 5) {
+                    newTower = Instantiate(currentConstruct.prefab, deposit.transform.position, deposit.transform.rotation);
+                        deposit.SetActive(false);
+                    ConCollector.bank -= currentConstruct.cost;
+                    Camera.main.GetComponent<CameraManager>().targets.Add(newTower.transform);
+                    Debug.Log("made collector");
+                    }
+                } else {
+                    newTower = Instantiate(currentConstruct.prefab, buildPreview.position, buildPreview.rotation);
+                    ConCollector.bank -= currentConstruct.cost;
+                    Camera.main.GetComponent<CameraManager>().targets.Add(newTower.transform);
+                    Debug.Log("made construct");
+                }
             }
         }
 
-        
-
+        //Enable our preview object
         if (Input.GetMouseButtonDown(1)) {
             buildPreview.gameObject.SetActive(true);
         }
@@ -67,9 +82,26 @@ public class playerConstruction : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Alpha0)) { num = 0; return num; };
         return num;
     }
+
+    public GameObject closestDeposit() {
+        var deposits = GameObject.FindGameObjectsWithTag("deposit");
+        var distance = float.MaxValue;
+        GameObject closest = null;
+        if (deposits != null) {
+            foreach (var deposit in deposits) {
+                var curDistance = (deposit.transform.position - buildPreview.position).sqrMagnitude;
+                if (curDistance < distance) {
+                    closest = deposit;
+                    distance = curDistance;
+                }
+            }
+        }
+        return closest;
+    }
 }
 
 //Class for holding constructable data
+[System.Serializable]
 public class constructType {
     //What specific construct are you?
     public GameObject prefab;
@@ -77,4 +109,6 @@ public class constructType {
     public string tag;
     //What number key should we press to select you?
     public int slotNum;
+    //How much do you cost?
+    public int cost;
 }

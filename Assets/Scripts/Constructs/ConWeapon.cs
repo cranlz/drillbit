@@ -17,6 +17,7 @@ public class ConWeapon : Construct {
     private LineRenderer shotLine;
     private WaitForSeconds shotDuration = new WaitForSeconds(.05f);
     public float range = 50.0f;
+    public GameObject bitToRotate;
 
     void Start() {
         shotLine = GetComponent<LineRenderer>();
@@ -38,17 +39,17 @@ public class ConWeapon : Construct {
             var lookPos = target.transform.position - transform.position;
             lookPos.y = 0;
             var endRot = Quaternion.LookRotation(lookPos);
-            var newRot = Quaternion.RotateTowards(transform.rotation, endRot, Time.deltaTime * rotationSpeed);
-            transform.rotation = newRot;
+            var newRot = Quaternion.RotateTowards(bitToRotate.transform.rotation, endRot, Time.deltaTime * rotationSpeed);
+            bitToRotate.transform.rotation = newRot;
 
             //Fire every rateOfFire seconds, but only if enemy is in our sights
             timer += Time.deltaTime;
-            if (Vector3.Angle(transform.forward, lookPos) < maxFireAngle && timer > rateOfFire) {
+            if (Vector3.Angle(bitToRotate.transform.forward, lookPos) < maxFireAngle && timer > rateOfFire) {
                 //Shoot out our raycast and apply damage to enemy
                 StartCoroutine(ShotEffect());
                 RaycastHit hit;
                 shotLine.SetPosition(0, transform.InverseTransformPoint(barrelExit.position));
-                if (Physics.Raycast(barrelExit.position, transform.forward, out hit, range)) {
+                if (Physics.Raycast(barrelExit.position, bitToRotate.transform.forward, out hit, range)) {
                     shotLine.SetPosition(1, transform.InverseTransformPoint(hit.point));
                     Hostile hScript = hit.collider.GetComponent<Hostile>();
                     //Debug.Log("hit " + hit.collider.gameObject.name);
@@ -60,11 +61,11 @@ public class ConWeapon : Construct {
                         }
                     }
                 }
-                else shotLine.SetPosition(1, transform.InverseTransformPoint(transform.forward * range));
+                else shotLine.SetPosition(1, bitToRotate.transform.InverseTransformPoint(bitToRotate.transform.forward * range));
                 timer = 0f;
             }
         } else { //Idle state
-            //transform.Rotate(0f, 0.1f, 0f, Space.Self);
+            bitToRotate.transform.Rotate(0f, 0.1f, 0f, Space.Self);
         }
 
     }

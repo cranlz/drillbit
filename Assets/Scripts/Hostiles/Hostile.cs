@@ -14,11 +14,12 @@ public class Hostile : MonoBehaviour
     //Pathfinding script
     private IAstarAI ai;
     
-    private SpriteRenderer sprite;
+    public SpriteRenderer sprite;
+    public float flashDuration = 0.5f;
+    public Material flashMat;
 
     void Start() {
         ai = GetComponent<IAstarAI>();
-        sprite = gameObject.GetComponent<SpriteRenderer>();
         target = FindClosestConstruct();
         ai.destination = target.transform.position;
     }
@@ -27,6 +28,7 @@ public class Hostile : MonoBehaviour
     //Can heal by using negative ints
     public void Damage(int dmg) {
         hp -= dmg;
+        StartCoroutine(FlashEffect());
         //If damage causes the hostile's health to be
         // negative, destroy it
         if (hp <= 0 && !markedForDeletion) {
@@ -56,6 +58,14 @@ public class Hostile : MonoBehaviour
             }
         }
         return closest;
+    }
+
+    //Activate flash for our flashDuration
+    private IEnumerator FlashEffect() {
+        var original = sprite.material;
+        sprite.material = flashMat;
+        yield return flashDuration;
+        sprite.material = original;
     }
 
     //It might be worth handing object pooling here for performance later

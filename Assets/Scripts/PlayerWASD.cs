@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//This class should only be for player movement - WASD style
 public class PlayerWASD : MonoBehaviour {
     
     public GameObject sprite;

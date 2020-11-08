@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 292505584763262807}
   m_Layer: 0
   m_Name: Resource Deposit
-  m_TagString: Untagged
+  m_TagString: deposit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
