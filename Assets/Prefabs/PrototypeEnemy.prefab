@@ -247,8 +247,7 @@ MonoBehaviour:
   markedForDeletion: 0
   target: {fileID: 0}
   sprite: {fileID: 5534797987122319561}
-  flashDuration: 10
-  flashMat: {fileID: 2100000, guid: 42ba43e16fc8d064296157ee2b9c0c0c, type: 2}
+  flashMat: {fileID: 2100000, guid: 855f43bf32edbb842b50986cc00c7622, type: 2}
 --- !u!136 &6284494176595429524
 CapsuleCollider:
   m_ObjectHideFlags: 0

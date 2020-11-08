@@ -15,7 +15,7 @@ public class Hostile : MonoBehaviour
     private IAstarAI ai;
     
     public SpriteRenderer sprite;
-    public float flashDuration = 0.5f;
+    public WaitForSeconds flashDuration = new WaitForSeconds(.05f);
     public Material flashMat;
 
     void Start() {
@@ -62,6 +62,7 @@ public class Hostile : MonoBehaviour
 
     //Activate flash for our flashDuration
     private IEnumerator FlashEffect() {
+        Debug.Log("flashing");
         var original = sprite.material;
         sprite.material = flashMat;
         yield return flashDuration;
