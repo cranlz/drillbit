@@ -49,10 +49,15 @@ public class playerConstruction : MonoBehaviour {
                     Debug.Log("made collector");
                     }
                 } else {
-                    newTower = Instantiate(currentConstruct.prefab, buildPreview.position, buildPreview.rotation);
-                    ConCollector.bank -= currentConstruct.cost;
-                    Camera.main.GetComponent<CameraManager>().targets.Add(newTower.transform);
-                    Debug.Log("made construct");
+                    //make sure our tower isn't colliding with anything
+                    Collider[] hitColliders = Physics.OverlapBox(buildPreview.gameObject.transform.position, buildPreview.gameObject.transform.localScale / 2, buildPreview.gameObject.transform.rotation);
+                    //Debug.Log(hitColliders.Length);
+                    if (hitColliders.Length == 0) {
+                        newTower = Instantiate(currentConstruct.prefab, buildPreview.position, buildPreview.rotation);
+                        ConCollector.bank -= currentConstruct.cost;
+                        Camera.main.GetComponent<CameraManager>().targets.Add(newTower.transform);
+                        Debug.Log("made construct");
+                    }
                 }
             }
         }

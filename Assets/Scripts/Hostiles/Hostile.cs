@@ -18,6 +18,9 @@ public class Hostile : MonoBehaviour
     public WaitForSeconds flashDuration = new WaitForSeconds(.05f);
     public Material flashMat;
 
+    public GameObject bloodPart;
+    public GameObject flashPart;
+
     void Start() {
         ai = GetComponent<IAstarAI>();
         target = FindClosestConstruct();
@@ -32,6 +35,8 @@ public class Hostile : MonoBehaviour
         //If damage causes the hostile's health to be
         // negative, destroy it
         if (hp <= 0 && !markedForDeletion) {
+            Instantiate(bloodPart, gameObject.transform.position, gameObject.transform.rotation);
+            Instantiate(flashPart, gameObject.transform.position, gameObject.transform.rotation);
             markedForDeletion = true;
             WaveManager.enemyCount -= 1;
             Destroy(gameObject);
@@ -62,7 +67,6 @@ public class Hostile : MonoBehaviour
 
     //Activate flash for our flashDuration
     private IEnumerator FlashEffect() {
-        Debug.Log("flashing");
         var original = sprite.material;
         sprite.material = flashMat;
         yield return flashDuration;

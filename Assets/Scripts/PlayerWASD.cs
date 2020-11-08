@@ -44,7 +44,7 @@ public class PlayerWASD : MonoBehaviour {
         int layerMask = 1 << 10;
         if (!Physics.Raycast(gameObject.transform.position, move, 5f, layerMask)) {
             controller.Move(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized * Time.deltaTime * speed);
-        } else //Debug.Log("Hit wall");
+        } //else Debug.Log("Hit wall");
 
 
         
