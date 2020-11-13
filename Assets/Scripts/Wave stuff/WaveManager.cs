@@ -24,16 +24,16 @@ public class WaveManager : MonoBehaviour
         //Debug.Log(enemyCount);
         if (enemyCount <= 0) {
             //Start new wave
-            Debug.Log("Starting wave " + waveIndex);
             var pos = RandomCircle(Vector3.zero, 30f);
             var rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero);
             updateWaveUI();
             //start coroutine spawning enemies
             enemyCount = 0;
 
-            if (waveIndex <= waves.Length) {
+            if (waveIndex < waves.Length) {
+                Debug.Log("Starting wave " + waveIndex);
                 for (var i = 0; i < waves[waveIndex].spawns.Length; i++) {
-                    //This part looks complex but it's just looping through the num in our tuple structures
+                    //This part looks complex but it's just looping through the num in our group structures
                     for (var j = 0; j < waves[waveIndex].spawns[i].num; j++) {
                         pos.x += Random.Range(-2f, 2f);
                         pos.z += Random.Range(-2f, 2f);
@@ -43,9 +43,8 @@ public class WaveManager : MonoBehaviour
                     }
 
                 }
+                waveIndex++;
             }
-
-            waveIndex++;
         }
     }
 
