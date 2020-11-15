@@ -13,6 +13,7 @@ public class Hostile : MonoBehaviour
     public GameObject target = null;
     //Pathfinding script
     private IAstarAI ai;
+    //public GameObject waveM;
     
     public SpriteRenderer sprite;
     public WaitForSeconds flashDuration = new WaitForSeconds(.05f);
@@ -21,10 +22,15 @@ public class Hostile : MonoBehaviour
     public GameObject bloodPart;
     public GameObject flashPart;
 
+    public int damage;
+    public float attackRate;
+
     void Start() {
+        
         ai = GetComponent<IAstarAI>();
         target = FindClosestConstruct();
         ai.destination = target.transform.position;
+        InvokeRepeating("Attack", 0, attackRate);
     }
 
     //Deal some damage to the hostile
@@ -39,6 +45,7 @@ public class Hostile : MonoBehaviour
             Instantiate(flashPart, gameObject.transform.position, gameObject.transform.rotation);
             markedForDeletion = true;
             WaveManager.enemyCount -= 1;
+            //waveM.updateUI();
             Destroy(gameObject);
         }
     }
@@ -63,6 +70,8 @@ public class Hostile : MonoBehaviour
             }
         }
         return closest;
+
+
     }
 
     //Activate flash for our flashDuration
@@ -71,6 +80,35 @@ public class Hostile : MonoBehaviour
         sprite.material = flashMat;
         yield return flashDuration;
         sprite.material = original;
+    }
+
+    //should be called whenever our target is within range
+    public void Attack() {
+        //instead of doing all this, we really only need to deal a set amount
+        //of damage to our target when in range. no need for raycasting.
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 2f)) {
+            Debug.DrawRay(transform.position, transform.forward * 2f);
+            BasicTowerController towerScript = hit.collider.GetComponent<BasicTowerController>();
+            BasicCollector collectorScript = hit.collider.GetComponent<BasicCollector>();
+            if (towerScript != null) {
+                towerScript.Damage(damage, gameObject);
+                Debug.Log("hit " + hit.collider.gameObject.name);
+            } else if (collectorScript != null) {
+                collectorScript.Damage(damage, gameObject);
+                Debug.Log("hit " + hit.collider.gameObject.name);
+            }
+        }
+
+        //make sprite face the right way
+        //should only need to be called when target changes!
+        bool isLeft;
+        if (ai.velocity.x == 0) {
+            isLeft = sprite.flipX;
+        } else if (ai.velocity.x < 0) {
+            isLeft = true;
+        } else isLeft = false;
+        sprite.flipX = isLeft;
     }
 
     //It might be worth handing object pooling here for performance later

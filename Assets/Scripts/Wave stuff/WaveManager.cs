@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Pathfinding;
 
 public class WaveManager : MonoBehaviour
 {
@@ -11,10 +12,18 @@ public class WaveManager : MonoBehaviour
     public float enemyGrowthRate = 1.5f;
     public Text enemyUI;
     public Text waveUI;
+    [Range(0, 1)]
+    public float waveProb = 0; //Probability that a wave will happen
+    private GridGraph gridgraph;
+    public bool spawningEnemies = false;
+    public float timeBetweenWaves = 5f;
+    private float waveEndTime;
 
     // Update is called once per frame
     void Start()
     {
+        waveEndTime = Time.time;
+        gridgraph = AstarPath.active.data.gridGraph;
         waveIndex = 0;
         enemyCount = 0;
     }
@@ -22,49 +31,87 @@ public class WaveManager : MonoBehaviour
     {
         //Check if wave is over
         //Debug.Log(enemyCount);
-        if (enemyCount <= 0) {
-            //Start new wave
-            var pos = RandomCircle(Vector3.zero, 30f);
+        //Wave is over, start checking probability
+        /*
+        if (enemyCount <= 0 && ) { 
+            var pos = RandomOnPath();
             var rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero);
-            updateWaveUI();
-            //start coroutine spawning enemies
             enemyCount = 0;
 
+            //start coroutine spawning enemies?
             if (waveIndex < waves.Length) {
                 Debug.Log("Starting wave " + waveIndex);
                 for (var i = 0; i < waves[waveIndex].spawns.Length; i++) {
                     //This part looks complex but it's just looping through the num in our group structures
                     for (var j = 0; j < waves[waveIndex].spawns[i].num; j++) {
-                        pos.x += Random.Range(-2f, 2f);
-                        pos.z += Random.Range(-2f, 2f);
+                        pos.x += Random.Range(-1f, 1f);
+                        pos.z += Random.Range(-1f, 1f);
                         //If we spawn a hostile, up the enemy count
                         if (Instantiate(waves[waveIndex].spawns[i].hostile, pos, rot)) enemyCount++;
-                        updateEnemyUI();
                     }
 
                 }
                 waveIndex++;
             }
+            updateUI();
+        }*/
+
+        //NEW CODE
+        //If there are no enemies currently and no enemies left in the wave, we are between waves and should start calculating probability
+        if (!spawningEnemies && enemyCount <= 0) {
+            if (Time.time - waveEndTime >= timeBetweenWaves) waveProb = 1;
         }
+        if (Random.value < waveProb) { //Start spawning enemies
+            waveProb = 0;
+            spawningEnemies = true;
+            //Spawn enemies coroutine
+            if (waveIndex < waves.Length) {
+                //Spawn wave at current waveIndex
+                StartCoroutine("SpawnWave");
+            } else {
+                //ProcGen waves can be handled here
+                spawningEnemies = false;
+                waveEndTime = Time.time;
+            }
+        }
+        updateUI();
     }
 
-    public void updateEnemyUI()
-    {
+    IEnumerator SpawnWave() {
+
+        for (var i = 0; i < waves[waveIndex].spawns.Length; i++) {
+            //Each group gets a different position
+            var pos = RandomOnPath();
+            var rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero);
+            //This part looks complex but it's just looping through the num in our group structures
+            for (var j = 0; j < waves[waveIndex].spawns[i].num; j++) {
+                pos.x += Random.Range(-1f, 1f);
+                pos.z += Random.Range(-1f, 1f);
+                //If we spawn a hostile, up the enemy count
+                if (Instantiate(waves[waveIndex].spawns[i].hostile, pos, rot)) enemyCount++;
+                yield return new WaitForSeconds(1f);
+            }
+
+        }
+        waveIndex++;
+        spawningEnemies = false;
+        waveEndTime = Time.time;
+    }
+
+    public void updateUI() {
         enemyUI.text = "Enemies: " + enemyCount;
-    }
-
-    public void updateWaveUI()
-    {
         waveUI.text = "Wave: " + waveIndex;
     }
 
-    public Vector3 RandomCircle(Vector3 center, float radius) {
-        //Create random angle between 0 to 360 degrees
-        var ang = Random.value * 360;
-        Vector3 pos;
-        pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        pos.z = center.z + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
-        pos.y = center.y;
+    public Vector3 RandomOnPath() {
+        //Repeat until we find a pos that works
+        int x, z;
+        do {
+            //Generate random x,y based on depth and width
+            x = Random.Range(0, gridgraph.depth);
+            z = Random.Range(0, gridgraph.width);
+        } while (!gridgraph.GetNode(x,z).Walkable);
+        Vector3 pos = (Vector3)gridgraph.GetNode(x, z).position;
         return pos;
     }
 }
