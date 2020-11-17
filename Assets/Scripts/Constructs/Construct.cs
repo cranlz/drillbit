@@ -21,6 +21,7 @@ public class Construct : MonoBehaviour
         // negative, destroy it
         if (hp <= 0 && !markedForDeletion)
         {
+            Camera.main.GetComponent<CameraManager>().targets.Remove(gameObject.transform);
             markedForDeletion = true;
             Destroy(gameObject);
         }

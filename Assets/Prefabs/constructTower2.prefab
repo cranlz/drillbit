@@ -1243,8 +1243,8 @@ GameObject:
   - component: {fileID: 362240749780938194}
   - component: {fileID: 362240749780938193}
   m_Layer: 0
-  m_Name: constructTower1 1
-  m_TagString: Untagged
+  m_Name: constructTower2
+  m_TagString: construct
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

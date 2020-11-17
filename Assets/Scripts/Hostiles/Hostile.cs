@@ -13,17 +13,16 @@ public class Hostile : MonoBehaviour
     public GameObject target = null;
     //Pathfinding script
     private IAstarAI ai;
-    //public GameObject waveM;
     
     public SpriteRenderer sprite;
     public WaitForSeconds flashDuration = new WaitForSeconds(.05f);
     public Material flashMat;
-
     public GameObject bloodPart;
     public GameObject flashPart;
 
-    public int damage;
+    public int attackDamage;
     public float attackRate;
+    public float attackRange;
 
     void Start() {
         
@@ -43,9 +42,9 @@ public class Hostile : MonoBehaviour
         if (hp <= 0 && !markedForDeletion) {
             Instantiate(bloodPart, gameObject.transform.position, gameObject.transform.rotation);
             Instantiate(flashPart, gameObject.transform.position, gameObject.transform.rotation);
+            Camera.main.GetComponent<CameraManager>().targets.Remove(gameObject.transform);
             markedForDeletion = true;
             WaveManager.enemyCount -= 1;
-            //waveM.updateUI();
             Destroy(gameObject);
         }
     }
@@ -84,19 +83,13 @@ public class Hostile : MonoBehaviour
 
     //should be called whenever our target is within range
     public void Attack() {
-        //instead of doing all this, we really only need to deal a set amount
-        //of damage to our target when in range. no need for raycasting.
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 2f)) {
+        var closest = FindClosestConstruct();
+        if ((closest.transform.position - transform.position).sqrMagnitude <= attackRange) {
             Debug.DrawRay(transform.position, transform.forward * 2f);
-            BasicTowerController towerScript = hit.collider.GetComponent<BasicTowerController>();
-            BasicCollector collectorScript = hit.collider.GetComponent<BasicCollector>();
-            if (towerScript != null) {
-                towerScript.Damage(damage, gameObject);
-                Debug.Log("hit " + hit.collider.gameObject.name);
-            } else if (collectorScript != null) {
-                collectorScript.Damage(damage, gameObject);
-                Debug.Log("hit " + hit.collider.gameObject.name);
+            Construct constructScript = closest.GetComponent<Construct>();
+            if (constructScript != null) {
+                constructScript.Damage(attackDamage);
+                Debug.Log("hit " + closest.name);
             }
         }
 

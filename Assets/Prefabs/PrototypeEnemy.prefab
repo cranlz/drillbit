@@ -128,7 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97206f8ea21fd1040b945809d27ce804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
 --- !u!1 &8281063204035625128
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +265,9 @@ MonoBehaviour:
     type: 3}
   flashPart: {fileID: 2481712190604275804, guid: 70bb74a624c44a64f8af5e344ce3b823,
     type: 3}
+  attackDamage: 1
+  attackRate: 1
+  attackRange: 20
 --- !u!136 &6284494176595429524
 CapsuleCollider:
   m_ObjectHideFlags: 0
