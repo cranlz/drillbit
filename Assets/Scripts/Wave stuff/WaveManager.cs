@@ -78,13 +78,13 @@ public class WaveManager : MonoBehaviour
     }
 
     IEnumerator SpawnWave() {
-
         for (var i = 0; i < waves[waveIndex].spawns.Length; i++) {
             //Each group gets a different position
             var pos = RandomOnPath();
             var rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero);
             //This part looks complex but it's just looping through the num in our group structures
             for (var j = 0; j < waves[waveIndex].spawns[i].num; j++) {
+                //Give them a lil offset
                 pos.x += Random.Range(-1f, 1f);
                 pos.z += Random.Range(-1f, 1f);
                 //If we spawn a hostile, up the enemy count
@@ -93,6 +93,7 @@ public class WaveManager : MonoBehaviour
             }
 
         }
+        //We have finished spawning our wave
         waveIndex++;
         spawningEnemies = false;
         waveEndTime = Time.time;
