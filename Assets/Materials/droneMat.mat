@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: playerMat
+  m_Name: droneMat
   m_Shader: {fileID: -6465566751694194690, guid: 9a75f62a16c0c874faf5f8f844e139f3,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA

@@ -12,7 +12,7 @@ public class Hostile : MonoBehaviour
     //Current construct to target
     public GameObject target = null;
     //Pathfinding script
-    private IAstarAI ai;
+    public IAstarAI ai;
     
     public SpriteRenderer sprite;
     public WaitForSeconds flashDuration = new WaitForSeconds(.05f);
@@ -24,7 +24,7 @@ public class Hostile : MonoBehaviour
     public float attackRate;
     public float attackRange;
 
-    void Start() {
+    public virtual void Start() {
         
         ai = GetComponent<IAstarAI>();
         target = FindClosestConstruct();
@@ -34,7 +34,7 @@ public class Hostile : MonoBehaviour
 
     //Deal some damage to the hostile
     //Can heal by using negative ints
-    public void Damage(int dmg) {
+    public virtual void Damage(int dmg) {
         hp -= dmg;
         StartCoroutine(FlashEffect());
         //If damage causes the hostile's health to be
@@ -50,13 +50,13 @@ public class Hostile : MonoBehaviour
     }
 
     //Sets the current HP to a specific value
-    public void SetHP(int newHP) {
+    public virtual void SetHP(int newHP) {
         hp = newHP;
     }
 
     //Returns the closest GameObject tagged 'construct'
     //Optional argument to ignore a tower when searching
-    public GameObject FindClosestConstruct(GameObject ignore = null) {
+    public virtual GameObject FindClosestConstruct(GameObject ignore = null) {
         var distance = float.MaxValue;
         var towers = GameObject.FindGameObjectsWithTag("construct");
         GameObject closest = null;
@@ -74,7 +74,7 @@ public class Hostile : MonoBehaviour
     }
 
     //Activate flash for our flashDuration
-    private IEnumerator FlashEffect() {
+    public virtual IEnumerator FlashEffect() {
         var original = sprite.material;
         sprite.material = flashMat;
         yield return flashDuration;
@@ -82,7 +82,7 @@ public class Hostile : MonoBehaviour
     }
 
     //should be called whenever our target is within range
-    public void Attack() {
+    public virtual void Attack() {
         var closest = FindClosestConstruct();
         if ((closest.transform.position - transform.position).sqrMagnitude <= attackRange) {
             Debug.DrawRay(transform.position, transform.forward * 2f);
