@@ -6059,7 +6059,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 38f8663bd667aae4b9307ca87e22d4fe, type: 2}
+  - {fileID: 2100000, guid: fc53eb2a72de63e48ada44019232688f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11071,7 +11071,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124796871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.44, y: 1.04, z: -2.73}
+  m_LocalPosition: {x: 0.27, y: 1.04, z: 3.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 974345560}
@@ -12578,6 +12578,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2043301517, guid: 41c7dceb486c5264b8f57c1396be3af3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2043301518, guid: 41c7dceb486c5264b8f57c1396be3af3, type: 3}
       propertyPath: m_Color.r
       value: 0.53333336
