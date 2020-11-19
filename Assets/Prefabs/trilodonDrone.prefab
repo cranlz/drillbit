@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 4200798318600954653}
   - component: {fileID: 6284494176595429524}
   m_Layer: 0
-  m_Name: PrototypeEnemy
+  m_Name: trilodonDrone
   m_TagString: hostile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2ea2beeadaf6f4fafa3a5565d39044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
+  hp: 30
   markedForDeletion: 0
   target: {fileID: 0}
   sprite: {fileID: 5534797987122319561}
@@ -265,7 +265,7 @@ MonoBehaviour:
     type: 3}
   flashPart: {fileID: 2481712190604275804, guid: 70bb74a624c44a64f8af5e344ce3b823,
     type: 3}
-  attackDamage: 1
+  attackDamage: 10
   attackRate: 1
   attackRange: 20
 --- !u!136 &6284494176595429524

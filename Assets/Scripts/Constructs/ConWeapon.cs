@@ -18,6 +18,7 @@ public class ConWeapon : Construct {
     private WaitForSeconds shotDuration = new WaitForSeconds(.05f);
     public float range = 50.0f;
     public GameObject bitToRotate;
+    public float closeRangeIgnore = 1;
 
     void Start() {
         shotLine = GetComponent<LineRenderer>();
@@ -79,13 +80,13 @@ public class ConWeapon : Construct {
     }
 
     //Returns the closest hostile inside our trigger
-    public GameObject FindClosestHostile() {
+    public virtual GameObject FindClosestHostile() {
         var distance = float.MaxValue;
         var hostiles = GameObject.FindGameObjectsWithTag("hostile");
         GameObject closest = null;
         foreach (var i in hostiles) {
             var curDistance = (i.transform.position - transform.position).sqrMagnitude;
-            if (curDistance < distance) {
+            if (curDistance < distance && curDistance > Mathf.Pow(closeRangeIgnore, 2)) {
                 closest = i;
                 distance = curDistance;
             }

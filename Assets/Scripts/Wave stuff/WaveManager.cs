@@ -18,6 +18,7 @@ public class WaveManager : MonoBehaviour
     public bool spawningEnemies = false;
     public float timeBetweenWaves = 5f;
     private float waveEndTime;
+    public GameObject partBurrow;
 
     // Update is called once per frame
     void Start()
@@ -82,6 +83,12 @@ public class WaveManager : MonoBehaviour
             //Each group gets a different position
             var pos = RandomOnPath();
             var rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero);
+
+            var burrowParts = Instantiate(partBurrow, pos, rot).GetComponent<ParticleSystem>();
+            burrowParts.Stop();
+            var main = burrowParts.main;
+            main.duration = waves[waveIndex].spawns.Length;
+            burrowParts.Play();
             //This part looks complex but it's just looping through the num in our group structures
             for (var j = 0; j < waves[waveIndex].spawns[i].num; j++) {
                 //Give them a lil offset

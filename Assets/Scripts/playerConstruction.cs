@@ -42,7 +42,7 @@ public class playerConstruction : MonoBehaviour {
                 if (currentConstruct.tag == "collector") {
                     var deposit = closestDeposit();
                     if (deposit != null && (deposit.transform.position - buildPreview.position).sqrMagnitude < 5) {
-                    newTower = Instantiate(currentConstruct.prefab, deposit.transform.position, deposit.transform.rotation);
+                        newTower = Instantiate(currentConstruct.prefab, deposit.transform.position, deposit.transform.rotation);
                         deposit.SetActive(false);
                     ConCollector.bank -= currentConstruct.cost;
                     Camera.main.GetComponent<CameraManager>().targets.Add(newTower.transform);
@@ -50,10 +50,12 @@ public class playerConstruction : MonoBehaviour {
                     }
                 } else {
                     //make sure our tower isn't colliding with anything
-                    Collider[] hitColliders = Physics.OverlapBox(buildPreview.gameObject.transform.position, buildPreview.gameObject.transform.localScale / 2, buildPreview.gameObject.transform.rotation);
+                    Collider[] hitColliders = Physics.OverlapBox(buildPreview.position, buildPreview.localScale / 2, buildPreview.rotation);
                     //Debug.Log(hitColliders.Length);
                     if (hitColliders.Length == 0) {
-                        newTower = Instantiate(currentConstruct.prefab, buildPreview.position, buildPreview.rotation);
+                        var spawnPos = buildPreview.position;
+                        spawnPos.y = 0f;
+                        newTower = Instantiate(currentConstruct.prefab, spawnPos, buildPreview.rotation);
                         ConCollector.bank -= currentConstruct.cost;
                         Camera.main.GetComponent<CameraManager>().targets.Add(newTower.transform);
                         Debug.Log("made construct");

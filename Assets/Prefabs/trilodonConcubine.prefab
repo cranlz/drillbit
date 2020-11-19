@@ -210,7 +210,7 @@ MonoBehaviour:
   repathRate: 0.5
   canSearch: 1
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 2
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4bbd615f2a4c643b4bf3c2e5ee51bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 100
   markedForDeletion: 0
   target: {fileID: 0}
   sprite: {fileID: 5295904372209714390}
@@ -281,7 +281,8 @@ MonoBehaviour:
     type: 3}
   attackDamage: 4
   attackRate: 2
-  attackRange: 10
+  attackRange: 35
   deployTime: 5
   servantPrefab: {fileID: 7229175660850936930, guid: c1570c077fc09524cb61335a36b587e9,
     type: 3}
+  animator: {fileID: 4605375043357157345}
