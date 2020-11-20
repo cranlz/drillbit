@@ -13,10 +13,8 @@ public class DigFromCave : MonoBehaviour {
     public float circRad = 5f;
     public bool snip = false;
     public AstarPath path;
-
-    private void Start() {
-
-    }
+    public int amountDug = 0;
+    private bool hasCookieBeenCreated = false;
 
     private void Update()
     {
@@ -28,6 +26,10 @@ public class DigFromCave : MonoBehaviour {
             var posY = circRad * Mathf.Cos(ang * Mathf.Deg2Rad) + gameObject.transform.position.z;
             cookieCutter.points.Add(new Vector3(posX, 0f, posY));
             ang += circAng;
+        }
+        if (!hasCookieBeenCreated) {
+            amountDug = cookieCutter.points.Count;
+            hasCookieBeenCreated = true;
         }
 
         if (Input.GetKeyDown(KeyCode.G))
@@ -49,6 +51,13 @@ public class DigFromCave : MonoBehaviour {
             if (!c.Execute(ClipType.ctUnion, solution, PolyFillType.pftEvenOdd, PolyFillType.pftEvenOdd)) Debug.Log("solution failure");
 
             caveMeshes.shapes[1] = PathToShape(solution[0]);
+            if (solution[0].Count > amountDug) {
+                var before = ConCollector.bank;
+                ConCollector.bank += (solution[0].Count - amountDug) / 2;
+                Debug.Log("Deposited " + (ConCollector.bank - before));
+            }
+            amountDug = solution[0].Count;
+
             caveMeshes.UpdateMeshDisplay();
 
             var bounds = GetComponent<Collider>().bounds;
@@ -80,7 +89,6 @@ public class DigFromCave : MonoBehaviour {
             //Debug.Log(posX + " " + posY);
             points.Add(new IntPoint(posX, posY));
         }
-        Debug.Log(points.Count);
         return points;
     }
 
