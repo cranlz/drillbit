@@ -61,6 +61,8 @@ public class WaveManager : MonoBehaviour
         //If there are no enemies currently and no enemies left in the wave, we are between waves and should start calculating probability
         if (!spawningEnemies && enemyCount <= 0) {
             if (Time.time - waveEndTime >= timeBetweenWaves) waveProb = 1;
+            //Debug.Log((Time.time - waveEndTime) / 200f);
+            waveProb += (Time.time - waveEndTime) / 200f;
         }
         if (Random.value < waveProb) { //Start spawning enemies
             waveProb = 0;
@@ -82,7 +84,7 @@ public class WaveManager : MonoBehaviour
         for (var i = 0; i < waves[waveIndex].spawns.Length; i++) {
             //Each group gets a different position
             var pos = RandomOnPath();
-            var rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero);
+            var rot = Quaternion.FromToRotation(Vector3.back, Vector3.right);
 
             var burrowParts = Instantiate(partBurrow, pos, rot).GetComponent<ParticleSystem>();
             burrowParts.Stop();
