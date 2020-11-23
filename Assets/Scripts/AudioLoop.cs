@@ -12,7 +12,7 @@ public class AudioLoop : MonoBehaviour
     void Update()
     {
         //Crank up the intensity if enemies are around
-        if (WaveManager.enemyCount > 0) { intensity = Mathf.Lerp(intensity, 1, 0.01f); } 
+        if (WaveManager.enemyCount > 0) { intensity = Mathf.Lerp(intensity, 1, 0.001f); } 
         else intensity = Mathf.Lerp(intensity, 0, 0.005f);
 
         intenseMusic.volume = intensity;

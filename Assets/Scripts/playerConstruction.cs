@@ -7,6 +7,7 @@ public class playerConstruction : MonoBehaviour {
     public LayerMask whatCanBeClickedOn;
     //What are we able to build?
     public constructType[] constructs;
+    public WaveManager waveManager;
 
     private Transform buildPreview;
     private constructType currentConstruct;
@@ -47,6 +48,7 @@ public class playerConstruction : MonoBehaviour {
                     ConCollector.bank -= currentConstruct.cost;
                     Camera.main.GetComponent<CameraManager>().targets.Add(newTower.transform);
                     Debug.Log("made collector");
+                    waveManager.waveProb += 0.01f;
                     }
                 } else {
                     //make sure our tower isn't colliding with anything
@@ -59,6 +61,7 @@ public class playerConstruction : MonoBehaviour {
                         ConCollector.bank -= currentConstruct.cost;
                         Camera.main.GetComponent<CameraManager>().targets.Add(newTower.transform);
                         Debug.Log("made construct");
+                        waveManager.waveProb += 0.01f;
                     }
                 }
             }

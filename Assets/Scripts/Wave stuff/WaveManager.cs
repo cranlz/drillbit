@@ -12,6 +12,7 @@ public class WaveManager : MonoBehaviour
     public float enemyGrowthRate = 1.5f;
     public Text enemyUI;
     public Text waveUI;
+    public Text idiumUI;
     [Range(0, 1)]
     public float waveProb = 0; //Probability that a wave will happen
     private GridGraph gridgraph;
@@ -19,6 +20,7 @@ public class WaveManager : MonoBehaviour
     public float timeBetweenWaves = 5f;
     private float waveEndTime;
     public GameObject partBurrow;
+    public GameObject partRichter;
 
     // Update is called once per frame
     void Start()
@@ -27,42 +29,21 @@ public class WaveManager : MonoBehaviour
         gridgraph = AstarPath.active.data.gridGraph;
         waveIndex = 0;
         enemyCount = 0;
+
+        InvokeRepeating("waveCheck", 0, 1);
     }
-    void Update()
-    {
-        //Check if wave is over
-        //Debug.Log(enemyCount);
-        //Wave is over, start checking probability
-        /*
-        if (enemyCount <= 0 && ) { 
-            var pos = RandomOnPath();
-            var rot = Quaternion.FromToRotation(Vector3.forward, Vector3.zero);
-            enemyCount = 0;
 
-            //start coroutine spawning enemies?
-            if (waveIndex < waves.Length) {
-                Debug.Log("Starting wave " + waveIndex);
-                for (var i = 0; i < waves[waveIndex].spawns.Length; i++) {
-                    //This part looks complex but it's just looping through the num in our group structures
-                    for (var j = 0; j < waves[waveIndex].spawns[i].num; j++) {
-                        pos.x += Random.Range(-1f, 1f);
-                        pos.z += Random.Range(-1f, 1f);
-                        //If we spawn a hostile, up the enemy count
-                        if (Instantiate(waves[waveIndex].spawns[i].hostile, pos, rot)) enemyCount++;
-                    }
+    public void Update() {
+        //Handle richter code here
+        partRichter.transform.position = new Vector3((waveProb*100)*Mathf.Sin(Time.time*8), -10, 3.68f);
+    }
 
-                }
-                waveIndex++;
-            }
-            updateUI();
-        }*/
-
-        //NEW CODE
+    public void waveCheck() {
         //If there are no enemies currently and no enemies left in the wave, we are between waves and should start calculating probability
         if (!spawningEnemies && enemyCount <= 0) {
-            if (Time.time - waveEndTime >= timeBetweenWaves) waveProb = 1;
-            //Debug.Log((Time.time - waveEndTime) / 200f);
-            waveProb += (Time.time - waveEndTime) / 200f;
+            //waveProb += (Time.time - waveEndTime) / 200000000f; //Base it off of time?
+
+
         }
         if (Random.value < waveProb) { //Start spawning enemies
             waveProb = 0;
@@ -81,6 +62,7 @@ public class WaveManager : MonoBehaviour
     }
 
     IEnumerator SpawnWave() {
+        Debug.Log("Spawning wave: " + waveIndex);
         for (var i = 0; i < waves[waveIndex].spawns.Length; i++) {
             //Each group gets a different position
             var pos = RandomOnPath();
@@ -97,7 +79,8 @@ public class WaveManager : MonoBehaviour
                 pos.x += Random.Range(-1f, 1f);
                 pos.z += Random.Range(-1f, 1f);
                 //If we spawn a hostile, up the enemy count
-                if (Instantiate(waves[waveIndex].spawns[i].hostile, pos, rot)) enemyCount++;
+                Instantiate(waves[waveIndex].spawns[i].hostile, pos, rot);
+                enemyCount++;
                 yield return new WaitForSeconds(1f);
             }
 
@@ -109,8 +92,9 @@ public class WaveManager : MonoBehaviour
     }
 
     public void updateUI() {
-        enemyUI.text = "Enemies: " + enemyCount;
-        waveUI.text = "Wave: " + waveIndex;
+        enemyUI.text = "HOSTILES: " + enemyCount;
+        waveUI.text = "WAVE: " + waveIndex;
+        idiumUI.text = "IDIUM: " + ConCollector.bank;
     }
 
     public Vector3 RandomOnPath() {
