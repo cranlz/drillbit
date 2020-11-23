@@ -280,9 +280,9 @@ MonoBehaviour:
   flashPart: {fileID: 2481712190604275804, guid: 70bb74a624c44a64f8af5e344ce3b823,
     type: 3}
   animator: {fileID: 4605375043357157345}
-  attackDamage: 4
+  attackDamage: 5
   attackRate: 2
-  attackRange: 6
+  attackRange: 7
   deployTime: 5
   servantPrefab: {fileID: 7229175660850936930, guid: c1570c077fc09524cb61335a36b587e9,
     type: 3}

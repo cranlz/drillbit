@@ -1293,7 +1293,7 @@ MonoBehaviour:
   maxFireAngle: 10
   range: 100
   bitToRotate: {fileID: 362240749518767950}
-  closeRangeIgnore: 1
+  closeRangeIgnore: 2
 --- !u!135 &362240749780938196
 SphereCollider:
   m_ObjectHideFlags: 0

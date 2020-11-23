@@ -10,6 +10,7 @@ public class ConCollector : Construct {
     public static int bank = 0;
     public GameObject text;
     private TextMeshPro textMesh;
+    public static bool collecting = false;
 
     //Get any components, and start collecting after setupTime
     void Start() {
@@ -21,10 +22,15 @@ public class ConCollector : Construct {
     // only when we need to
     void Update() {
         textMesh.SetText("{0}", bank);
+        if (Input.GetKeyDown(KeyCode.C)) {
+            collecting = true;
+        }
     }
 
     //Self explanatory
     private void Collect() {
-        bank += collectionAmount;
+        if (collecting) {
+            bank += collectionAmount;
+        }
     }
 }

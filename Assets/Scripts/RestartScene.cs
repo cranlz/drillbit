@@ -6,7 +6,13 @@
      
          public void RestartGame() {
              SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-             BasicCollector.bank = 10;
+             ConCollector.bank = 0;
          }
-     
-     }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            RestartGame();
+        }
+    }
+
+}

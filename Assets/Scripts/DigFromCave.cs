@@ -55,6 +55,7 @@ public class DigFromCave : MonoBehaviour {
                 var before = ConCollector.bank;
                 ConCollector.bank += (solution[0].Count - amountDug) / 2;
                 Debug.Log("Deposited " + (ConCollector.bank - before));
+                GameObject.Find("WaveManager").GetComponent<WaveManager>().waveProb += 0.003f;
             }
             amountDug = solution[0].Count;
 

@@ -268,7 +268,7 @@ MonoBehaviour:
   animator: {fileID: 4204336433663980542}
   attackDamage: 10
   attackRate: 1
-  attackRange: 4.5
+  attackRange: 5
 --- !u!136 &6284494176595429524
 CapsuleCollider:
   m_ObjectHideFlags: 0

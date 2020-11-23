@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61ef43e4435288a49b86d9bdab1c43e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 200
   markedForDeletion: 0
   setupTime: 1
   rateOfCollection: 1
