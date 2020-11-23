@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4204336433663980542}
   - component: {fileID: 2723138824155070988}
   m_Layer: 0
-  m_Name: Roach2_0 (1)
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,9 +265,10 @@ MonoBehaviour:
     type: 3}
   flashPart: {fileID: 2481712190604275804, guid: 70bb74a624c44a64f8af5e344ce3b823,
     type: 3}
+  animator: {fileID: 4204336433663980542}
   attackDamage: 10
   attackRate: 1
-  attackRange: 20
+  attackRange: 4.5
 --- !u!136 &6284494176595429524
 CapsuleCollider:
   m_ObjectHideFlags: 0

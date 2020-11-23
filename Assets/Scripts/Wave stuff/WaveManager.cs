@@ -4,27 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using Pathfinding;
 
-public class WaveManager : MonoBehaviour
-{
+public class WaveManager : MonoBehaviour {
     public Wave[] waves;
     public static int enemyCount;
     public int waveIndex = 0;
-    public float enemyGrowthRate = 1.5f;
     public Text enemyUI;
     public Text waveUI;
     public Text idiumUI;
-    [Range(0, 1)]
-    public float waveProb = 0; //Probability that a wave will happen
     private GridGraph gridgraph;
     public bool spawningEnemies = false;
     public float timeBetweenWaves = 5f;
     private float waveEndTime;
     public GameObject partBurrow;
+
+    [Range(0, 1)]
+    public float waveProb = 0; //Probability that a wave will happen
+    public float probStage0;
+    public float probStage1;
+    public float probStage2;
     public GameObject partRichter;
 
     // Update is called once per frame
-    void Start()
-    {
+    void Start() {
         waveEndTime = Time.time;
         gridgraph = AstarPath.active.data.gridGraph;
         waveIndex = 0;
@@ -35,7 +36,7 @@ public class WaveManager : MonoBehaviour
 
     public void Update() {
         //Handle richter code here
-        partRichter.transform.position = new Vector3((waveProb*100)*Mathf.Sin(Time.time*8), -10, 3.68f);
+        partRichter.transform.position = new Vector3((waveProb * 100) * Mathf.Sin(Time.time * 8), -10, 3.68f);
     }
 
     public void waveCheck() {
@@ -104,7 +105,7 @@ public class WaveManager : MonoBehaviour
             //Generate random x,y based on depth and width
             x = Random.Range(0, gridgraph.depth);
             z = Random.Range(0, gridgraph.width);
-        } while (!gridgraph.GetNode(x,z).Walkable);
+        } while (!gridgraph.GetNode(x, z).Walkable);
         Vector3 pos = (Vector3)gridgraph.GetNode(x, z).position;
         return pos;
     }

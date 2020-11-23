@@ -71,7 +71,7 @@
  
                     o.pos = UnityObjectToClipPos(IN[i].vertex + float4(normalFace, 0) * _Factor);
                     o.uv = IN[i].uv;
-                    o.col = fixed4(.07, .07, .10, 1.);
+                    o.col = fixed4(.043, .058, .078, 1.);
                     tristream.Append(o);
  
                     //Loop us back through the vertices
@@ -88,7 +88,7 @@
                     //Make another triangle: 1 at base, 2 at _Factor height along normal
                     o.pos = UnityObjectToClipPos(IN[i].vertex + float4(normalFace, 0) * _Factor);
                     o.uv = IN[i].uv;
-                    o.col = fixed4(.07, .07, .10, 1.);
+                    o.col = fixed4(.043, .058, .078, 1.);
                     tristream.Append(o);
  
                     o.pos = UnityObjectToClipPos(IN[inext].vertex);
@@ -98,7 +98,7 @@
  
                     o.pos = UnityObjectToClipPos(IN[inext].vertex + float4(normalFace, 0) * _Factor);
                     o.uv = IN[inext].uv;
-                    o.col = fixed4(.07, .07, .10, 1.);
+                    o.col = fixed4(.043, .058, .078, 1.);
                     tristream.Append(o);
  
                     tristream.RestartStrip();

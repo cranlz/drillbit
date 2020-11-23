@@ -19,6 +19,11 @@ public class Hostile : MonoBehaviour
     public Material flashMat;
     public GameObject bloodPart;
     public GameObject flashPart;
+    public Animator animator;
+    private string currentState;
+
+    const string walkAnim = "HostileWalk";
+    const string attackAnim = "HostileAttack";
 
     public int attackDamage;
     public float attackRate;
@@ -84,8 +89,8 @@ public class Hostile : MonoBehaviour
     //should be called whenever our target is within range
     public virtual void Attack() {
         var closest = FindClosestConstruct();
-        if ((closest.transform.position - transform.position).sqrMagnitude <= attackRange) {
-            Debug.DrawRay(transform.position, transform.forward * 2f);
+        if ((closest.transform.position - transform.position).sqrMagnitude <= Mathf.Pow(attackRange, 2)) {
+            animator.Play("HostileAttack");
             Construct constructScript = closest.GetComponent<Construct>();
             if (constructScript != null) {
                 constructScript.Damage(attackDamage);
@@ -102,6 +107,13 @@ public class Hostile : MonoBehaviour
             isLeft = true;
         } else isLeft = false;
         sprite.flipX = isLeft;
+    }
+
+    void ChangeAnimationState(string newState) {
+        if (currentState == newState) return;
+        animator.Play(newState);
+
+        currentState = newState;
     }
 
     //It might be worth handing object pooling here for performance later

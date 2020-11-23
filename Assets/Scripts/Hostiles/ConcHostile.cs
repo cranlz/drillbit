@@ -7,7 +7,6 @@ public class ConcHostile : Hostile
 {
     public float deployTime = 5f;
     public GameObject servantPrefab;
-    public Animator animator;
 
     public override void Start() {
         base.Start();
