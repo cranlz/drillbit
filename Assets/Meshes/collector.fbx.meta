@@ -26,6 +26,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: collector_mat
     second: {fileID: 2100000, guid: bcfe74a0a610efd4c9f0fa2f46bf9a89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: collector_top
+    second: {fileID: 2100000, guid: 42ba43e16fc8d064296157ee2b9c0c0c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: 8f467ae95a63c4d479e7924627d80126, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
